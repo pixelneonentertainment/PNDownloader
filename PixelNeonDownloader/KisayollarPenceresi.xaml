@@ -1,0 +1,130 @@
+﻿<Window x:Class="PixelNeonDownloader.KisayollarPenceresi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:PixelNeonDownloader"
+        Title="Klavye Kısayolları"
+        Height="480" Width="420"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Border Background="#0A0F1E"
+            BorderBrush="#2200FFE5"
+            BorderThickness="1"
+            CornerRadius="6">
+        <Border.Effect>
+            <DropShadowEffect Color="#00FFE5" BlurRadius="20"
+                              ShadowDepth="0" Opacity="0.3"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="44"/>
+            </Grid.RowDefinitions>
+
+            <!-- BAŞLIK -->
+            <Border Grid.Row="0"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="Baslik_MouseLeftButtonDown">
+                <Grid Margin="16,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="⌨ " Foreground="#00FFE5"
+                                   FontSize="14" VerticalAlignment="Center"/>
+                        <TextBlock Text="KLAVYE KISAYOLLARI"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="12" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✕"
+                            HorizontalAlignment="Right"
+                            Width="32" Height="32"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#FF2244"
+                            FontFamily="Consolas"
+                            Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- İÇERİK -->
+            <ScrollViewer Grid.Row="1"
+                          VerticalScrollBarVisibility="Auto"
+                          Margin="0,4,0,0">
+                <StackPanel Margin="16,8">
+
+                    <!-- İndirme İşlemleri -->
+                    <TextBlock Text="İNDİRME İŞLEMLERİ"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,0,0,8"/>
+
+                    <local:KisayolSatir Kisayol="Ctrl + N"
+                                        Aciklama="Yeni indirme ekle"/>
+                    <local:KisayolSatir Kisayol="Ctrl + S"
+                                        Aciklama="Duraklat / Devam et"/>
+                    <local:KisayolSatir Kisayol="Delete"
+                                        Aciklama="Seçili indirmeyi kaldır"/>
+
+                    <!-- Görünüm -->
+                    <TextBlock Text="GÖRÜNÜM"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,16,0,8"/>
+
+                    <local:KisayolSatir Kisayol="Ctrl + F"
+                                        Aciklama="Aramaya odaklan"/>
+                    <local:KisayolSatir Kisayol="Escape"
+                                        Aciklama="Aramayı temizle"/>
+                    <local:KisayolSatir Kisayol="Ctrl + A"
+                                        Aciklama="Tümünü seç"/>
+                    <local:KisayolSatir Kisayol="F5"
+                                        Aciklama="Listeyi yenile"/>
+
+                    <!-- Pencereler -->
+                    <TextBlock Text="PENCERELER"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,16,0,8"/>
+
+                    <local:KisayolSatir Kisayol="Ctrl + I"
+                                        Aciklama="İstatistikleri aç"/>
+                    <local:KisayolSatir Kisayol="Ctrl + O"
+                                        Aciklama="Klasörü aç"/>
+                    <local:KisayolSatir Kisayol="Ctrl + ,"
+                                        Aciklama="Ayarları aç"/>
+                    <local:KisayolSatir Kisayol="Ctrl + ?"
+                                        Aciklama="Bu pencereyi aç"/>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- ALT -->
+            <Border Grid.Row="2"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,1,0,0">
+                <Button Content="KAPAT"
+                        Width="100" Height="32"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,16,0"
+                        Background="Transparent"
+                        BorderBrush="#2200FFE5" BorderThickness="1"
+                        Foreground="#00FFE5"
+                        FontFamily="Consolas"
+                        FontSize="11" FontWeight="Bold"
+                        Cursor="Hand"
+                        Click="Kapat_Click"/>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

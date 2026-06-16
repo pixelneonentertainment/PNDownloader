@@ -1,0 +1,223 @@
+﻿<Window x:Class="PixelNeonDownloader.SifreliArsivPenceresi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Şifreli Arşiv"
+        Height="420" Width="500"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Border Background="#0A0F1E"
+            BorderBrush="#2200FFE5"
+            BorderThickness="1"
+            CornerRadius="6">
+        <Border.Effect>
+            <DropShadowEffect Color="#00FFE5" BlurRadius="20"
+                              ShadowDepth="0" Opacity="0.3"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="56"/>
+            </Grid.RowDefinitions>
+
+            <!-- BAŞLIK -->
+            <Border Grid.Row="0"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="Baslik_MouseLeftButtonDown">
+                <Grid Margin="16,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="🔐 " Foreground="#00FFE5"
+                                   FontSize="14" VerticalAlignment="Center"/>
+                        <TextBlock Text="ŞİFRELİ ARŞİV"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="12" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✕"
+                            HorizontalAlignment="Right"
+                            Width="32" Height="32"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#FF2244"
+                            FontFamily="Consolas"
+                            Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- İÇERİK -->
+            <StackPanel Grid.Row="1" Margin="20,16">
+
+                <!-- Dosya Bilgisi -->
+                <Border Background="#0D1428"
+                        BorderBrush="#1500FFE5"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="14,12"
+                        Margin="0,0,0,12">
+                    <StackPanel>
+                        <TextBlock Text="ARŞİV DOSYASI"
+                                   Foreground="#3A5070"
+                                   FontFamily="Consolas"
+                                   FontSize="9" FontWeight="Bold"
+                                   Margin="0,0,0,4"/>
+                        <TextBlock x:Name="TxtDosyaAdi"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="11" FontWeight="Bold"
+                                   TextTrimming="CharacterEllipsis"/>
+                        <TextBlock x:Name="TxtDosyaBilgi"
+                                   Foreground="#7A9CC0"
+                                   FontFamily="Consolas"
+                                   FontSize="9"
+                                   Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Şifre -->
+                <TextBlock Text="ARŞİV ŞİFRESİ"
+                           Foreground="#7A9CC0"
+                           FontFamily="Consolas"
+                           FontSize="10" FontWeight="Bold"
+                           Margin="0,0,0,6"/>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="36"/>
+                    </Grid.ColumnDefinitions>
+                    <PasswordBox x:Name="TxtSifre"
+                                 Grid.Column="0"
+                                 Height="36"
+                                 Background="#050810"
+                                 Foreground="#E0F0FF"
+                                 BorderBrush="#223A5070"
+                                 BorderThickness="1"
+                                 FontFamily="Consolas"
+                                 FontSize="12"
+                                 Padding="10,6"/>
+                    <Button Grid.Column="1"
+                            x:Name="BtnSifreGoster"
+                            Content="👁"
+                            Height="36" Margin="4,0,0,0"
+                            Background="Transparent"
+                            BorderBrush="#223A5070" BorderThickness="1"
+                            FontSize="14" Cursor="Hand"
+                            Click="BtnSifreGoster_Click"/>
+                </Grid>
+
+                <!-- Şifre Görünür -->
+                <TextBox x:Name="TxtSifreGorunur"
+                         Height="36"
+                         Background="#050810"
+                         Foreground="#00FFE5"
+                         BorderBrush="#2200FFE5"
+                         BorderThickness="1"
+                         FontFamily="Consolas"
+                         FontSize="12"
+                         Padding="10,6"
+                         CaretBrush="#00FFE5"
+                         Visibility="Collapsed"
+                         Margin="0,0,0,12"/>
+
+                <!-- Çıkartma Klasörü -->
+                <TextBlock Text="ÇIKARTMA KLASÖRÜ"
+                           Foreground="#7A9CC0"
+                           FontFamily="Consolas"
+                           FontSize="10" FontWeight="Bold"
+                           Margin="0,0,0,6"/>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="46"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="TxtCikartmaYolu"
+                             Grid.Column="0"
+                             Height="36"
+                             Background="#050810" Foreground="#E0F0FF"
+                             BorderBrush="#223A5070" BorderThickness="1"
+                             FontFamily="Consolas" FontSize="11"
+                             Padding="8,6" CaretBrush="#00FFE5"/>
+                    <Button Grid.Column="1"
+                            Content="📁" Height="36" Margin="6,0,0,0"
+                            Background="Transparent"
+                            BorderBrush="#2200FFE5" BorderThickness="1"
+                            FontSize="16" Cursor="Hand"
+                            Click="KlasorSec_Click"/>
+                </Grid>
+
+                <!-- İlerleme -->
+                <Border x:Name="PanelIlerleme"
+                        Background="#0D1428"
+                        BorderBrush="#1500FFE5"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="14,10"
+                        Visibility="Collapsed">
+                    <StackPanel>
+                        <TextBlock x:Name="TxtIlerleme"
+                                   Text="Çıkartılıyor..."
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="10"
+                                   Margin="0,0,0,6"/>
+                        <ProgressBar x:Name="ProgressCikartma"
+                                     Height="4"
+                                     Background="#0A0F1E"
+                                     BorderThickness="0"
+                                     IsIndeterminate="True">
+                            <ProgressBar.Foreground>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#FF00FFE5" Offset="0"/>
+                                    <GradientStop Color="#FFBD00FF" Offset="1"/>
+                                </LinearGradientBrush>
+                            </ProgressBar.Foreground>
+                        </ProgressBar>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+
+            <!-- ALT BUTONLAR -->
+            <Border Grid.Row="2"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,1,0,0">
+                <Grid Margin="20,0">
+                    <TextBlock x:Name="TxtDurum"
+                               Text="Şifreyi girin"
+                               Foreground="#3A5070"
+                               FontFamily="Consolas" FontSize="10"
+                               VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center">
+                        <Button Content="İPTAL"
+                                Width="90" Height="34" Margin="0,0,10,0"
+                                Background="Transparent"
+                                BorderBrush="#22FF006E" BorderThickness="1"
+                                Foreground="#FF006E" FontFamily="Consolas"
+                                FontSize="11" FontWeight="Bold" Cursor="Hand"
+                                Click="Kapat_Click"/>
+                        <Button x:Name="BtnCikart"
+                                Content="🔓 ÇIKART"
+                                Width="120" Height="34"
+                                Background="Transparent"
+                                BorderBrush="#3900FFE5" BorderThickness="1"
+                                Foreground="#00FFE5" FontFamily="Consolas"
+                                FontSize="11" FontWeight="Bold" Cursor="Hand"
+                                Click="BtnCikart_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

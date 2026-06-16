@@ -1,0 +1,333 @@
+﻿<Window x:Class="PixelNeonDownloader.IstatistikPenceresi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="İstatistikler"
+        Height="500" Width="600"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Border Background="#0A0F1E"
+            BorderBrush="#2200FFE5"
+            BorderThickness="1"
+            CornerRadius="6">
+        <Border.Effect>
+            <DropShadowEffect Color="#00FFE5" BlurRadius="20"
+                              ShadowDepth="0" Opacity="0.3"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="44"/>
+            </Grid.RowDefinitions>
+
+            <!-- BAŞLIK -->
+            <Border Grid.Row="0"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="Baslik_MouseLeftButtonDown">
+                <Grid Margin="16,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="📊 " Foreground="#00FFE5"
+                                   FontSize="14" VerticalAlignment="Center"/>
+                        <TextBlock Text="İSTATİSTİKLER"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="12" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✕"
+                            HorizontalAlignment="Right"
+                            Width="32" Height="32"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#FF2244"
+                            FontFamily="Consolas"
+                            Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- İÇERİK -->
+            <ScrollViewer Grid.Row="1"
+                          VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="20,16">
+
+                    <!-- GENEL İSTATİSTİKLER -->
+                    <TextBlock Text="GENEL"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,0,0,10"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Toplam İndirme -->
+                        <Border Grid.Column="0"
+                                Background="#0D1428"
+                                BorderBrush="#1500FFE5"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="14,12"
+                                Margin="0,0,8,0">
+                            <StackPanel>
+                                <TextBlock Text="TOPLAM"
+                                           Foreground="#7A9CC0"
+                                           FontFamily="Consolas"
+                                           FontSize="9" FontWeight="Bold"/>
+                                <TextBlock x:Name="TxtToplamIndirme"
+                                           Text="0"
+                                           Foreground="#00FFE5"
+                                           FontFamily="Consolas"
+                                           FontSize="24" FontWeight="Bold"
+                                           Margin="0,4,0,0"/>
+                                <TextBlock Text="indirme"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="10"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Tamamlanan -->
+                        <Border Grid.Column="1"
+                                Background="#0D1428"
+                                BorderBrush="#1500FFE5"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="14,12"
+                                Margin="0,0,8,0">
+                            <StackPanel>
+                                <TextBlock Text="TAMAMLANAN"
+                                           Foreground="#7A9CC0"
+                                           FontFamily="Consolas"
+                                           FontSize="9" FontWeight="Bold"/>
+                                <TextBlock x:Name="TxtTamamlanan"
+                                           Text="0"
+                                           Foreground="#39FF14"
+                                           FontFamily="Consolas"
+                                           FontSize="24" FontWeight="Bold"
+                                           Margin="0,4,0,0"/>
+                                <TextBlock Text="indirme"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="10"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Hata -->
+                        <Border Grid.Column="2"
+                                Background="#0D1428"
+                                BorderBrush="#1500FFE5"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="14,12">
+                            <StackPanel>
+                                <TextBlock Text="HATA"
+                                           Foreground="#7A9CC0"
+                                           FontFamily="Consolas"
+                                           FontSize="9" FontWeight="Bold"/>
+                                <TextBlock x:Name="TxtHatali"
+                                           Text="0"
+                                           Foreground="#FF2244"
+                                           FontFamily="Consolas"
+                                           FontSize="24" FontWeight="Bold"
+                                           Margin="0,4,0,0"/>
+                                <TextBlock Text="indirme"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="10"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <!-- TOPLAM VERİ -->
+                    <TextBlock Text="VERİ"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,20,0,10"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0"
+                                Background="#0D1428"
+                                BorderBrush="#1500FFE5"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="14,12"
+                                Margin="0,0,8,0">
+                            <StackPanel>
+                                <TextBlock Text="TOPLAM İNDİRİLEN"
+                                           Foreground="#7A9CC0"
+                                           FontFamily="Consolas"
+                                           FontSize="9" FontWeight="Bold"/>
+                                <TextBlock x:Name="TxtToplamBoyut"
+                                           Text="0 B"
+                                           Foreground="#00FFE5"
+                                           FontFamily="Consolas"
+                                           FontSize="20" FontWeight="Bold"
+                                           Margin="0,4,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="1"
+                                Background="#0D1428"
+                                BorderBrush="#1500FFE5"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="14,12">
+                            <StackPanel>
+                                <TextBlock Text="AKTİF İNDİRME"
+                                           Foreground="#7A9CC0"
+                                           FontFamily="Consolas"
+                                           FontSize="9" FontWeight="Bold"/>
+                                <TextBlock x:Name="TxtAktif"
+                                           Text="0"
+                                           Foreground="#FFD700"
+                                           FontFamily="Consolas"
+                                           FontSize="20" FontWeight="Bold"
+                                           Margin="0,4,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <!-- KATEGORİ DAĞILIMI -->
+                    <TextBlock Text="KATEGORİ DAĞILIMI"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,20,0,10"/>
+
+                    <Border Background="#0D1428"
+                            BorderBrush="#1500FFE5"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="14,12">
+                        <StackPanel x:Name="KategoriPanel"/>
+                    </Border>
+
+                    <!-- TÜR DAĞILIMI -->
+                    <TextBlock Text="TÜR DAĞILIMI"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,20,0,10"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" Background="#0D1428"
+                                BorderBrush="#1500FFE5" BorderThickness="1"
+                                CornerRadius="4" Padding="10,10" Margin="0,0,6,0">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="↓" Foreground="#00FFE5"
+                                           FontFamily="Consolas" FontSize="20"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock x:Name="TxtHTTP"
+                                           Text="0" Foreground="#00FFE5"
+                                           FontFamily="Consolas" FontSize="16"
+                                           FontWeight="Bold"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock Text="HTTP" Foreground="#3A5070"
+                                           FontFamily="Consolas" FontSize="9"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="1" Background="#0D1428"
+                                BorderBrush="#1500FFE5" BorderThickness="1"
+                                CornerRadius="4" Padding="10,10" Margin="0,0,6,0">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="⟁" Foreground="#BD00FF"
+                                           FontFamily="Consolas" FontSize="20"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock x:Name="TxtTorrent"
+                                           Text="0" Foreground="#BD00FF"
+                                           FontFamily="Consolas" FontSize="16"
+                                           FontWeight="Bold"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock Text="TORRENT" Foreground="#3A5070"
+                                           FontFamily="Consolas" FontSize="9"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="2" Background="#0D1428"
+                                BorderBrush="#1500FFE5" BorderThickness="1"
+                                CornerRadius="4" Padding="10,10" Margin="0,0,6,0">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="⚡" Foreground="#FFD700"
+                                           FontFamily="Consolas" FontSize="20"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock x:Name="TxtMagnet"
+                                           Text="0" Foreground="#FFD700"
+                                           FontFamily="Consolas" FontSize="16"
+                                           FontWeight="Bold"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock Text="MAGNET" Foreground="#3A5070"
+                                           FontFamily="Consolas" FontSize="9"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="3" Background="#0D1428"
+                                BorderBrush="#1500FFE5" BorderThickness="1"
+                                CornerRadius="4" Padding="10,10">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="⬡" Foreground="#FF006E"
+                                           FontFamily="Consolas" FontSize="20"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock x:Name="TxtFTP"
+                                           Text="0" Foreground="#FF006E"
+                                           FontFamily="Consolas" FontSize="16"
+                                           FontWeight="Bold"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock Text="FTP" Foreground="#3A5070"
+                                           FontFamily="Consolas" FontSize="9"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- ALT -->
+            <Border Grid.Row="2"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,1,0,0">
+                <Button Content="KAPAT"
+                        Width="100" Height="32"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,20,0"
+                        Background="Transparent"
+                        BorderBrush="#2200FFE5"
+                        BorderThickness="1"
+                        Foreground="#00FFE5"
+                        FontFamily="Consolas"
+                        FontSize="11" FontWeight="Bold"
+                        Cursor="Hand"
+                        Click="Kapat_Click"/>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

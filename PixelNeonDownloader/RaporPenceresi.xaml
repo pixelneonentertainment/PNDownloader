@@ -1,0 +1,316 @@
+﻿<Window x:Class="PixelNeonDownloader.RaporPenceresi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="İndirme Raporu"
+        Height="660" Width="620"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Border Background="#0A0F1E"
+            BorderBrush="#2200FFE5"
+            BorderThickness="1"
+            CornerRadius="6">
+        <Border.Effect>
+            <DropShadowEffect Color="#00FFE5" BlurRadius="20"
+                              ShadowDepth="0" Opacity="0.3"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="56"/>
+            </Grid.RowDefinitions>
+
+            <!-- BAŞLIK -->
+            <Border Grid.Row="0"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="Baslik_MouseLeftButtonDown">
+                <Grid Margin="16,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="📊 " Foreground="#00FFE5"
+                                   FontSize="14" VerticalAlignment="Center"/>
+                        <TextBlock Text="DETAYLI İNDİRME RAPORU"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="12" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✕"
+                            HorizontalAlignment="Right"
+                            Width="32" Height="32"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#FF2244"
+                            FontFamily="Consolas"
+                            Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- İÇERİK -->
+            <ScrollViewer Grid.Row="1"
+                          VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="16,12">
+
+                    <!-- ÖZET KARTLARI -->
+                    <Grid Margin="0,0,0,14">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Toplam İndirme -->
+                        <Border Grid.Column="0"
+                                Background="#0D1428"
+                                BorderBrush="#1500FFE5"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="12,10">
+                            <StackPanel>
+                                <TextBlock Text="TOPLAM İNDİRME"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="9" FontWeight="Bold"/>
+                                <TextBlock x:Name="TxtToplamIndirme"
+                                           Text="0"
+                                           Foreground="#00FFE5"
+                                           FontFamily="Consolas"
+                                           FontSize="24" FontWeight="Bold"
+                                           Margin="0,4,0,0"/>
+                                <TextBlock Text="dosya"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="9"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Toplam Boyut -->
+                        <Border Grid.Column="2"
+                                Background="#0D1428"
+                                BorderBrush="#1500FFE5"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="12,10">
+                            <StackPanel>
+                                <TextBlock Text="TOPLAM BOYUT"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="9" FontWeight="Bold"/>
+                                <TextBlock x:Name="TxtToplamBoyut"
+                                           Text="0 B"
+                                           Foreground="#BD00FF"
+                                           FontFamily="Consolas"
+                                           FontSize="24" FontWeight="Bold"
+                                           Margin="0,4,0,0"/>
+                                <TextBlock Text="toplam"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="9"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Başarı Oranı -->
+                        <Border Grid.Column="4"
+                                Background="#0D1428"
+                                BorderBrush="#1500FFE5"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="12,10">
+                            <StackPanel>
+                                <TextBlock Text="BAŞARI ORANI"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="9" FontWeight="Bold"/>
+                                <TextBlock x:Name="TxtBasariOrani"
+                                           Text="%0"
+                                           Foreground="#39FF14"
+                                           FontFamily="Consolas"
+                                           FontSize="24" FontWeight="Bold"
+                                           Margin="0,4,0,0"/>
+                                <TextBlock Text="başarılı"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="9"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <!-- HIZ İSTATİSTİKLERİ -->
+                    <TextBlock Text="HIZ İSTATİSTİKLERİ"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,0,0,8"/>
+
+                    <Border Background="#0D1428"
+                            BorderBrush="#1500FFE5"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="14,12"
+                            Margin="0,0,0,14">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="ORTALAMA HIZ"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="9" FontWeight="Bold"/>
+                                <TextBlock x:Name="TxtOrtalamaHiz"
+                                           Text="0 B/s"
+                                           Foreground="#00FFE5"
+                                           FontFamily="Consolas"
+                                           FontSize="16" FontWeight="Bold"
+                                           Margin="0,4,0,0"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1"
+                                        HorizontalAlignment="Center">
+                                <TextBlock Text="EN YÜKSEK HIZ"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="9" FontWeight="Bold"/>
+                                <TextBlock x:Name="TxtMaksHiz"
+                                           Text="0 B/s"
+                                           Foreground="#39FF14"
+                                           FontFamily="Consolas"
+                                           FontSize="16" FontWeight="Bold"
+                                           Margin="0,4,0,0"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2"
+                                        HorizontalAlignment="Right">
+                                <TextBlock Text="TOPLAM SÜRE"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="9" FontWeight="Bold"/>
+                                <TextBlock x:Name="TxtToplamSure"
+                                           Text="0 sn"
+                                           Foreground="#BD00FF"
+                                           FontFamily="Consolas"
+                                           FontSize="16" FontWeight="Bold"
+                                           Margin="0,4,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <!-- KATEGORİ DAĞILIMI -->
+                    <TextBlock Text="KATEGORİ DAĞILIMI"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,0,0,8"/>
+
+                    <Border Background="#0D1428"
+                            BorderBrush="#1500FFE5"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="14,12"
+                            Margin="0,0,0,14">
+                        <StackPanel x:Name="KategoriPaneli"/>
+                    </Border>
+
+                    <!-- SON İNDİRMELER -->
+                    <TextBlock Text="SON İNDİRMELER"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,0,0,8"/>
+
+                    <Border Background="#050810"
+                            BorderBrush="#1500FFE5"
+                            BorderThickness="1"
+                            CornerRadius="4">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="28"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0"
+                                    Background="#0A0F1E"
+                                    BorderBrush="#1500FFE5"
+                                    BorderThickness="0,0,0,1"
+                                    CornerRadius="4,4,0,0">
+                                <Grid Margin="10,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="80"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="DOSYA"
+                                               Foreground="#3A5070"
+                                               FontFamily="Consolas" FontSize="9"
+                                               FontWeight="Bold"
+                                               VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="1" Text="BOYUT"
+                                               Foreground="#3A5070"
+                                               FontFamily="Consolas" FontSize="9"
+                                               FontWeight="Bold"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Grid.Column="2" Text="HIZ"
+                                               Foreground="#3A5070"
+                                               FontFamily="Consolas" FontSize="9"
+                                               FontWeight="Bold"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Grid.Column="3" Text="DURUM"
+                                               Foreground="#3A5070"
+                                               FontFamily="Consolas" FontSize="9"
+                                               FontWeight="Bold"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+
+                            <StackPanel x:Name="SonIndirmelerPaneli"
+                                        Grid.Row="1"/>
+                        </Grid>
+                    </Border>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- ALT -->
+            <Border Grid.Row="2"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,1,0,0">
+                <Grid Margin="16,0">
+                    <Button Content="📋 RAPORU KOPYALA"
+                            HorizontalAlignment="Left"
+                            Height="34" Padding="14,0"
+                            Background="Transparent"
+                            BorderBrush="#2200FFE5" BorderThickness="1"
+                            Foreground="#00FFE5"
+                            FontFamily="Consolas" FontSize="10" FontWeight="Bold"
+                            Cursor="Hand"
+                            Click="BtnKopyala_Click"/>
+                    <Button Content="KAPAT"
+                            HorizontalAlignment="Right"
+                            Width="100" Height="34"
+                            Background="Transparent"
+                            BorderBrush="#2200FFE5" BorderThickness="1"
+                            Foreground="#00FFE5"
+                            FontFamily="Consolas" FontSize="11" FontWeight="Bold"
+                            Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

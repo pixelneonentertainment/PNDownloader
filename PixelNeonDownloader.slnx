@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="PixelNeonDownloader/PixelNeonDownloader.csproj">
+    <BuildType Project="Release" />
+  </Project>
+</Solution>

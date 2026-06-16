@@ -1,0 +1,284 @@
+﻿<Window x:Class="PixelNeonDownloader.UltraHizPenceresi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ultra Hız Modu"
+        Height="520" Width="480"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Border Background="#0A0F1E"
+            BorderBrush="#2239FF14"
+            BorderThickness="1"
+            CornerRadius="6">
+        <Border.Effect>
+            <DropShadowEffect Color="#39FF14" BlurRadius="20"
+                              ShadowDepth="0" Opacity="0.4"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="56"/>
+            </Grid.RowDefinitions>
+
+            <!-- BAŞLIK -->
+            <Border Grid.Row="0"
+                    BorderBrush="#1539FF14"
+                    BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="Baslik_MouseLeftButtonDown">
+                <Grid Margin="16,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="⚡ " Foreground="#39FF14"
+                                   FontSize="14" VerticalAlignment="Center"/>
+                        <TextBlock Text="ULTRA HIZ MODU"
+                                   Foreground="#39FF14"
+                                   FontFamily="Consolas"
+                                   FontSize="12" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✕"
+                            HorizontalAlignment="Right"
+                            Width="32" Height="32"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#FF2244"
+                            FontFamily="Consolas"
+                            Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- İÇERİK -->
+            <StackPanel Grid.Row="1" Margin="20,16">
+
+                <!-- Ultra Mod Toggle -->
+                <Border Background="#0D1428"
+                        BorderBrush="#1539FF14"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="14,12"
+                        Margin="0,0,0,12">
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock Text="⚡ ULTRA HIZ MODU"
+                                       Foreground="#39FF14"
+                                       FontFamily="Consolas"
+                                       FontSize="12" FontWeight="Bold"/>
+                            <TextBlock Text="Tüm optimizasyonları etkinleştirir"
+                                       Foreground="#7A9CC0"
+                                       FontFamily="Consolas"
+                                       FontSize="10" Margin="0,4,0,0"/>
+                        </StackPanel>
+                        <Border x:Name="ToggleUltra"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Width="48" Height="26"
+                                CornerRadius="13" Cursor="Hand"
+                                MouseLeftButtonDown="ToggleUltra_Click">
+                            <Ellipse x:Name="ToggleUltraDaire"
+                                     Width="20" Height="20"
+                                     Margin="3,0,0,0"/>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!-- Parça Sayısı -->
+                <Border Background="#0D1428"
+                        BorderBrush="#1500FFE5"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="14,12"
+                        Margin="0,0,0,12">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,8">
+                            <TextBlock Text="PARÇA SAYISI (BAĞLANTI)"
+                                       Foreground="#E0F0FF"
+                                       FontFamily="Consolas"
+                                       FontSize="11" FontWeight="Bold"
+                                       VerticalAlignment="Center"/>
+                            <TextBlock x:Name="TxtParcaSayisi"
+                                       Text="16 parça"
+                                       Foreground="#39FF14"
+                                       FontFamily="Consolas"
+                                       FontSize="11" FontWeight="Bold"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                        <Slider x:Name="SliderParca"
+                                Minimum="1" Maximum="32"
+                                Value="16" TickFrequency="1"
+                                IsSnapToTickEnabled="True"
+                                Foreground="#39FF14"
+                                ValueChanged="SliderParca_Degisti"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                            <Button x:Name="BtnParca1" Content="1x" Height="22" Padding="8,0"
+                                    Margin="0,0,4,0" Background="Transparent"
+                                    BorderThickness="1" Foreground="#7A9CC0" FontFamily="Consolas"
+                                    FontSize="9" Cursor="Hand" Tag="1"
+                                    Click="ParcaKisayol_Click"/>
+                            <Button x:Name="BtnParca4" Content="4x" Height="22" Padding="8,0"
+                                    Margin="0,0,4,0" Background="Transparent"
+                                    BorderThickness="1" Foreground="#7A9CC0" FontFamily="Consolas"
+                                    FontSize="9" Cursor="Hand" Tag="4"
+                                    Click="ParcaKisayol_Click"/>
+                            <Button x:Name="BtnParca8" Content="8x" Height="22" Padding="8,0"
+                                    Margin="0,0,4,0" Background="Transparent"
+                                    BorderThickness="1" Foreground="#7A9CC0" FontFamily="Consolas"
+                                    FontSize="9" Cursor="Hand" Tag="8"
+                                    Click="ParcaKisayol_Click"/>
+                            <Button x:Name="BtnParca16" Content="16x" Height="22" Padding="8,0"
+                                    Margin="0,0,4,0" Background="Transparent"
+                                    BorderThickness="1" Foreground="#39FF14" FontFamily="Consolas"
+                                    FontSize="9" Cursor="Hand" Tag="16"
+                                    Click="ParcaKisayol_Click"/>
+                            <Button x:Name="BtnParca32" Content="32x" Height="22" Padding="8,0"
+                                    Background="Transparent"
+                                    BorderThickness="1" Foreground="#7A9CC0" FontFamily="Consolas"
+                                    FontSize="9" Cursor="Hand" Tag="32"
+                                    Click="ParcaKisayol_Click"/>
+                        </StackPanel>
+                        <TextBlock Text="💡 Çok parça = daha hızlı indirme (sunucu izin verirse)"
+                                   Foreground="#3A5070"
+                                   FontFamily="Consolas"
+                                   FontSize="9" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Buffer Boyutu -->
+                <Border Background="#0D1428"
+                        BorderBrush="#1500FFE5"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="14,12"
+                        Margin="0,0,0,12">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,8">
+                            <TextBlock Text="BUFFER BOYUTU"
+                                       Foreground="#E0F0FF"
+                                       FontFamily="Consolas"
+                                       FontSize="11" FontWeight="Bold"
+                                       VerticalAlignment="Center"/>
+                            <TextBlock x:Name="TxtBufferBoyutu"
+                                       Text="1 MB"
+                                       Foreground="#00FFE5"
+                                       FontFamily="Consolas"
+                                       FontSize="11" FontWeight="Bold"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                        <Slider x:Name="SliderBuffer"
+                                Minimum="1" Maximum="8"
+                                Value="4" TickFrequency="1"
+                                IsSnapToTickEnabled="True"
+                                Foreground="#00FFE5"
+                                ValueChanged="SliderBuffer_Degisti"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                            <Button x:Name="BtnBuffer64" Content="64 KB" Height="22" Padding="8,0"
+                                    Margin="0,0,4,0" Background="Transparent"
+                                    BorderThickness="1" Foreground="#7A9CC0" FontFamily="Consolas"
+                                    FontSize="9" Cursor="Hand" Tag="1"
+                                    Click="BufferKisayol_Click"/>
+                            <Button x:Name="BtnBuffer256" Content="256 KB" Height="22" Padding="8,0"
+                                    Margin="0,0,4,0" Background="Transparent"
+                                    BorderThickness="1" Foreground="#7A9CC0" FontFamily="Consolas"
+                                    FontSize="9" Cursor="Hand" Tag="2"
+                                    Click="BufferKisayol_Click"/>
+                            <Button x:Name="BtnBuffer512" Content="512 KB" Height="22" Padding="8,0"
+                                    Margin="0,0,4,0" Background="Transparent"
+                                    BorderThickness="1" Foreground="#7A9CC0" FontFamily="Consolas"
+                                    FontSize="9" Cursor="Hand" Tag="3"
+                                    Click="BufferKisayol_Click"/>
+                            <Button x:Name="BtnBuffer1" Content="1 MB" Height="22" Padding="8,0"
+                                    Margin="0,0,4,0" Background="Transparent"
+                                    BorderThickness="1" Foreground="#00FFE5" FontFamily="Consolas"
+                                    FontSize="9" Cursor="Hand" Tag="4"
+                                    Click="BufferKisayol_Click"/>
+                            <Button x:Name="BtnBuffer2" Content="2 MB" Height="22" Padding="8,0"
+                                    Margin="0,0,4,0" Background="Transparent"
+                                    BorderThickness="1" Foreground="#7A9CC0" FontFamily="Consolas"
+                                    FontSize="9" Cursor="Hand" Tag="6"
+                                    Click="BufferKisayol_Click"/>
+                            <Button x:Name="BtnBuffer4" Content="4 MB" Height="22" Padding="8,0"
+                                    Background="Transparent"
+                                    BorderThickness="1" Foreground="#7A9CC0" FontFamily="Consolas"
+                                    FontSize="9" Cursor="Hand" Tag="8"
+                                    Click="BufferKisayol_Click"/>
+                        </StackPanel>
+                        <TextBlock Text="💡 SSD: 2-4 MB  |  HDD: 512 KB - 1 MB"
+                                   Foreground="#3A5070"
+                                   FontFamily="Consolas"
+                                   FontSize="9" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Bilgi Kartı -->
+                <Border Background="#060C0A"
+                        BorderBrush="#1539FF14"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="14,10">
+                    <StackPanel>
+                        <TextBlock Text="⚡ ULTRA MOD AKTİF OLDUĞUNDA:"
+                                   Foreground="#39FF14"
+                                   FontFamily="Consolas"
+                                   FontSize="10" FontWeight="Bold"
+                                   Margin="0,0,0,6"/>
+                        <TextBlock Text="• 32 parça bağlantı (maksimum)"
+                                   Foreground="#7A9CC0"
+                                   FontFamily="Consolas" FontSize="9"/>
+                        <TextBlock Text="• 4 MB buffer boyutu"
+                                   Foreground="#7A9CC0"
+                                   FontFamily="Consolas" FontSize="9"/>
+                        <TextBlock Text="• Bant genişliği limiti kaldırılır"
+                                   Foreground="#7A9CC0"
+                                   FontFamily="Consolas" FontSize="9"/>
+                        <TextBlock Text="• Disk önbellekleme devre dışı"
+                                   Foreground="#7A9CC0"
+                                   FontFamily="Consolas" FontSize="9"/>
+                        <TextBlock Text="⚠ Sunucu izin verirse maksimum hız!"
+                                   Foreground="#FFD700"
+                                   FontFamily="Consolas"
+                                   FontSize="9" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+
+            <!-- ALT -->
+            <Border Grid.Row="2"
+                    BorderBrush="#1539FF14"
+                    BorderThickness="0,1,0,0">
+                <Grid Margin="20,0">
+                    <TextBlock x:Name="TxtDurum"
+                               Text="Ayarları kaydedin"
+                               Foreground="#3A5070"
+                               FontFamily="Consolas" FontSize="10"
+                               VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center">
+                        <Button Content="İPTAL"
+                                Width="90" Height="34" Margin="0,0,10,0"
+                                Background="Transparent"
+                                BorderBrush="#22FF006E" BorderThickness="1"
+                                Foreground="#FF006E" FontFamily="Consolas"
+                                FontSize="11" FontWeight="Bold" Cursor="Hand"
+                                Click="Kapat_Click"/>
+                        <Button Content="⚡ KAYDET"
+                                Width="110" Height="34"
+                                Background="Transparent"
+                                BorderBrush="#3939FF14" BorderThickness="1"
+                                Foreground="#39FF14" FontFamily="Consolas"
+                                FontSize="11" FontWeight="Bold" Cursor="Hand"
+                                Click="Kaydet_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

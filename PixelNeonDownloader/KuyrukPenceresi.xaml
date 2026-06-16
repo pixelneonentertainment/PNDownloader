@@ -1,0 +1,215 @@
+﻿<Window x:Class="PixelNeonDownloader.KuyrukPenceresi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="İndirme Kuyruğu"
+        Height="500" Width="540"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Border Background="#0A0F1E"
+            BorderBrush="#2200FFE5"
+            BorderThickness="1"
+            CornerRadius="6">
+        <Border.Effect>
+            <DropShadowEffect Color="#00FFE5" BlurRadius="20"
+                              ShadowDepth="0" Opacity="0.3"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="56"/>
+            </Grid.RowDefinitions>
+
+            <!-- BAŞLIK -->
+            <Border Grid.Row="0"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="Baslik_MouseLeftButtonDown">
+                <Grid Margin="16,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="📋 " Foreground="#00FFE5"
+                                   FontSize="14" VerticalAlignment="Center"/>
+                        <TextBlock Text="İNDİRME KUYRUĞU"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="12" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✕"
+                            HorizontalAlignment="Right"
+                            Width="32" Height="32"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#FF2244"
+                            FontFamily="Consolas"
+                            Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- İÇERİK -->
+            <Grid Grid.Row="1" Margin="16,12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Kuyruk Modu Toggle -->
+                <Border Grid.Row="0"
+                        Background="#0D1428"
+                        BorderBrush="#1500FFE5"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="14,12"
+                        Margin="0,0,0,10">
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock Text="KUYRUK MODU"
+                                       Foreground="#E0F0FF"
+                                       FontFamily="Consolas"
+                                       FontSize="11" FontWeight="Bold"/>
+                            <TextBlock Text="Etkinleştirilince indirmeler sırayla başlar"
+                                       Foreground="#7A9CC0"
+                                       FontFamily="Consolas"
+                                       FontSize="10" Margin="0,4,0,0"/>
+                        </StackPanel>
+                        <Border x:Name="ToggleKuyruk"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Width="48" Height="26"
+                                CornerRadius="13" Cursor="Hand"
+                                MouseLeftButtonDown="ToggleKuyruk_Click">
+                            <Ellipse x:Name="ToggleKuyrukDaire"
+                                     Width="20" Height="20"
+                                     Margin="3,0,0,0"/>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!-- Mevcut İndirme -->
+                <Border Grid.Row="1"
+                        x:Name="PanelMevcut"
+                        Background="#0D1428"
+                        BorderBrush="#2200FFE5"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="14,10"
+                        Margin="0,0,0,10"
+                        Visibility="Collapsed">
+                    <StackPanel>
+                        <TextBlock Text="ŞU AN İNDİRİLİYOR"
+                                   Foreground="#3A5070"
+                                   FontFamily="Consolas"
+                                   FontSize="9" FontWeight="Bold"
+                                   Margin="0,0,0,4"/>
+                        <TextBlock x:Name="TxtMevcutIndirme"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="11" FontWeight="Bold"
+                                   TextTrimming="CharacterEllipsis"/>
+                        <ProgressBar x:Name="ProgressMevcut"
+                                     Height="4" Margin="0,6,0,0"
+                                     Background="#0A0F1E"
+                                     BorderThickness="0">
+                            <ProgressBar.Foreground>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#FF00FFE5" Offset="0"/>
+                                    <GradientStop Color="#FFBD00FF" Offset="1"/>
+                                </LinearGradientBrush>
+                            </ProgressBar.Foreground>
+                        </ProgressBar>
+                    </StackPanel>
+                </Border>
+
+                <!-- Kuyruk Listesi -->
+                <Border Grid.Row="2"
+                        Background="#050810"
+                        BorderBrush="#1500FFE5"
+                        BorderThickness="1"
+                        CornerRadius="4">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="28"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0"
+                                Background="#0A0F1E"
+                                BorderBrush="#1500FFE5"
+                                BorderThickness="0,0,0,1"
+                                CornerRadius="4,4,0,0">
+                            <Grid Margin="10,0">
+                                <TextBlock Text="SIRA"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="9" FontWeight="Bold"
+                                           VerticalAlignment="Center"/>
+                                <TextBlock x:Name="TxtKuyrukSayisi"
+                                           Text="0 bekliyor"
+                                           Foreground="#7A9CC0"
+                                           FontFamily="Consolas"
+                                           FontSize="9"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+
+                        <ScrollViewer Grid.Row="1"
+                                      VerticalScrollBarVisibility="Auto">
+                            <StackPanel x:Name="KuyrukListesi"
+                                        Margin="0,4"/>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
+
+                <!-- Durum -->
+                <Border Grid.Row="3"
+                        Background="#0D1428"
+                        BorderBrush="#1500FFE5"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="10,8"
+                        Margin="0,10,0,0">
+                    <TextBlock x:Name="TxtDurum"
+                               Text="Kuyruk boş"
+                               Foreground="#3A5070"
+                               FontFamily="Consolas"
+                               FontSize="10"
+                               TextTrimming="CharacterEllipsis"/>
+                </Border>
+            </Grid>
+
+            <!-- ALT BUTONLAR -->
+            <Border Grid.Row="2"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,1,0,0">
+                <Grid Margin="16,0">
+                    <Button Content="🗑 KUYRUĞU TEMİZLE"
+                            HorizontalAlignment="Left"
+                            Width="160" Height="34"
+                            Background="Transparent"
+                            BorderBrush="#22FF006E" BorderThickness="1"
+                            Foreground="#FF006E" FontFamily="Consolas"
+                            FontSize="10" FontWeight="Bold" Cursor="Hand"
+                            Click="BtnTemizle_Click"/>
+                    <Button Content="KAPAT"
+                            HorizontalAlignment="Right"
+                            Width="100" Height="34"
+                            Background="Transparent"
+                            BorderBrush="#2200FFE5" BorderThickness="1"
+                            Foreground="#00FFE5" FontFamily="Consolas"
+                            FontSize="11" FontWeight="Bold" Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

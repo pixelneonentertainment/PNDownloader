@@ -1,0 +1,329 @@
+﻿<Window x:Class="PixelNeonDownloader.AyarlarPenceresi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ayarlar"
+        Height="540" Width="680"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Border Background="#050810"
+            BorderBrush="#2200FFE5"
+            BorderThickness="1"
+            CornerRadius="6">
+        <Border.Effect>
+            <DropShadowEffect Color="#00FFE5" BlurRadius="15"
+                              ShadowDepth="0" Opacity="0.2"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"/>
+                <RowDefinition Height="38"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="56"/>
+            </Grid.RowDefinitions>
+
+            <!-- BAŞLIK BARBARI (Sürükleme Alanı) -->
+            <Border Grid.Row="0"
+                    Background="#0A0F1E"
+                    CornerRadius="6,6,0,0"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="Baslik_MouseLeftButtonDown">
+                <Grid Margin="16,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="⚙ " Foreground="#00FFE5"
+                                   FontSize="14" VerticalAlignment="Center"/>
+                        <TextBlock Text="SİSTEM AYARLARI"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="12" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✕"
+                            HorizontalAlignment="Right"
+                            Width="32" Height="32"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#FF2244"
+                            FontFamily="Consolas"
+                            Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- SEKME SEÇİCİ MENÜ -->
+            <Border Grid.Row="1" Background="#0A0F1E" BorderBrush="#1000FFE5" BorderThickness="0,0,0,1">
+                <Grid Margin="12,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="BtnSekGenel" Grid.Column="0" Content="GENEL" Height="36" Background="Transparent" BorderThickness="0,0,0,2" BorderBrush="#00FFE5" Foreground="#00FFE5" FontFamily="Consolas" FontSize="11" FontWeight="Bold" Cursor="Hand" Tag="Genel" Click="BtnSekme_Click"/>
+                    <Button x:Name="BtnSekIndirme" Grid.Column="1" Content="İNDİRME" Height="36" Background="Transparent" BorderThickness="0,0,0,2" BorderBrush="Transparent" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="11" Cursor="Hand" Tag="Indirme" Click="BtnSekme_Click"/>
+                    <Button x:Name="BtnSekGorunum" Grid.Column="2" Content="GÖRÜNÜM" Height="36" Background="Transparent" BorderThickness="0,0,0,2" BorderBrush="Transparent" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="11" Cursor="Hand" Tag="Gorunum" Click="BtnSekme_Click"/>
+                    <Button x:Name="BtnSekAg" Grid.Column="3" Content="BAĞLANTI" Height="36" Background="Transparent" BorderThickness="0,0,0,2" BorderBrush="Transparent" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="11" Cursor="Hand" Tag="Ag" Click="BtnSekme_Click"/>
+                    <Button x:Name="BtnSekGelismis" Grid.Column="4" Content="GELİŞMİŞ" Height="36" Background="Transparent" BorderThickness="0,0,0,2" BorderBrush="Transparent" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="11" Cursor="Hand" Tag="Gelismis" Click="BtnSekme_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- İÇERİK PANELLERİ -->
+            <Grid Grid.Row="2" Margin="20,16">
+
+                <!-- 1. GENEL SEKMESİ -->
+                <StackPanel x:Name="PanelGenel" Visibility="Visible">
+                    <!-- Kayıt Klasörü -->
+                    <TextBlock Text="VARSAYILAN İNDİRME KLASÖRÜ" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="10" FontWeight="Bold" Margin="0,0,0,6"/>
+                    <Grid Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="80"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="TxtKlasor" Height="34" IsReadOnly="True" Background="#050810" Foreground="#E0F0FF" BorderBrush="#223A5070" BorderThickness="1" FontFamily="Consolas" FontSize="12" Padding="8,6" VerticalContentAlignment="Center"/>
+                        <Button Grid.Column="1" Content="SEÇ" Height="34" Margin="8,0,0,0" Background="Transparent" BorderBrush="#3900FFE5" BorderThickness="1" Foreground="#00FFE5" FontFamily="Consolas" FontSize="11" FontWeight="Bold" Cursor="Hand" Click="KlasorSec_Click"/>
+                    </Grid>
+
+                    <Separator Height="1" Background="#1500FFE5" Margin="0,0,0,16"/>
+
+                    <!-- Başlangıçta Çalıştır -->
+                    <Grid Margin="0,0,0,16">
+                        <StackPanel>
+                            <TextBlock Text="SİSTEM BAŞLANGICINDA ÇALIŞTIR" Foreground="#E0F0FF" FontFamily="Consolas" FontSize="12" FontWeight="Bold"/>
+                            <TextBlock Text="Bilgisayar açıldığında Pixel Neon otomatik olarak başlasın." Foreground="#5A7090" FontFamily="Consolas" FontSize="10" Margin="0,2,0,0"/>
+                        </StackPanel>
+                        <Border x:Name="ToggleBorder" Width="50" Height="24" HorizontalAlignment="Right" Background="#3300FFE5" BorderBrush="#3300FFE5" BorderThickness="1" CornerRadius="12" Cursor="Hand" MouseLeftButtonDown="Toggle_Click">
+                            <Ellipse x:Name="ToggleDaire" Width="18" Height="18" Fill="#3A5070" HorizontalAlignment="Left" Margin="3,0,0,0"/>
+                        </Border>
+                    </Grid>
+
+                    <!-- Sistem Tepsisine Küçült -->
+                    <Grid Margin="0,0,0,16">
+                        <StackPanel>
+                            <TextBlock Text="SİSTEM TEPSİSİNE KÜÇÜLT (TRAY)" Foreground="#E0F0FF" FontFamily="Consolas" FontSize="12" FontWeight="Bold"/>
+                            <TextBlock Text="Kapatıldığında veya simge durumuna alındığında arka planda çalışmaya devam et." Foreground="#5A7090" FontFamily="Consolas" FontSize="10" Margin="0,2,0,0"/>
+                        </StackPanel>
+                        <Border x:Name="ToggleTepsi" Width="50" Height="24" HorizontalAlignment="Right" Background="#3300FFE5" BorderBrush="#3300FFE5" BorderThickness="1" CornerRadius="12" Cursor="Hand" MouseLeftButtonDown="ToggleTepsi_Click">
+                            <Ellipse x:Name="ToggleTepsiDaire" Width="18" Height="18" Fill="#3A5070" HorizontalAlignment="Left" Margin="3,0,0,0"/>
+                        </Border>
+                    </Grid>
+
+                    <!-- Ses Efektleri -->
+                    <Grid Margin="0,0,0,16">
+                        <StackPanel>
+                            <TextBlock Text="SES EFEKTLERİNİ ETKİNLEŞTİR" Foreground="#E0F0FF" FontFamily="Consolas" FontSize="12" FontWeight="Bold"/>
+                            <TextBlock Text="İndirmeler tamamlandığında veya hata oluştuğunda sesli bildirim çal." Foreground="#5A7090" FontFamily="Consolas" FontSize="10" Margin="0,2,0,0"/>
+                        </StackPanel>
+                        <Border x:Name="ToggleSes" Width="50" Height="24" HorizontalAlignment="Right" Background="#3300FFE5" BorderBrush="#3300FFE5" BorderThickness="1" CornerRadius="12" Cursor="Hand" MouseLeftButtonDown="ToggleSes_Click">
+                            <Ellipse x:Name="ToggleSesDaire" Width="18" Height="18" Fill="#3A5070" HorizontalAlignment="Left" Margin="3,0,0,0"/>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+
+                <!-- 2. İNDİRME SEKMESİ (Bant Genişliği & Disk Önbellek) -->
+                <StackPanel x:Name="PanelIndirme" Visibility="Collapsed">
+                    <!-- Hız Sınırlandırıcı -->
+                    <Border Background="#0A0F1E" BorderBrush="#1500FFE5" BorderThickness="1" CornerRadius="4" Padding="16,12" Margin="0,0,0,16">
+                        <StackPanel>
+                            <Grid>
+                                <TextBlock Text="MAKSİMUM İNDİRME HIZI" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="11" FontWeight="Bold"/>
+                                <TextBlock x:Name="TxtHizGosterge" Text="Sınırsız" Foreground="#00FFE5" FontFamily="Consolas" FontSize="12" FontWeight="Bold" HorizontalAlignment="Right" Margin="0,0,60,0"/>
+                                <Border x:Name="ToggleHizSinir" Width="50" Height="24" HorizontalAlignment="Right" Background="#3300FFE5" BorderBrush="#3300FFE5" BorderThickness="1" CornerRadius="12" Cursor="Hand" MouseLeftButtonDown="ToggleHizSinir_Click">
+                                    <Ellipse x:Name="ToggleHizSinirDaire" Width="18" Height="18" Fill="#3A5070" HorizontalAlignment="Left" Margin="3,0,0,0"/>
+                                </Border>
+                            </Grid>
+                            <Grid x:Name="PanelHizSlider" Margin="0,12,0,0" Visibility="Collapsed">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <Slider x:Name="SliderHiz" Grid.Column="0" Minimum="128" Maximum="1048576" Value="10240" TickFrequency="1024" IsSnapToTickEnabled="False" VerticalAlignment="Center" ValueChanged="SliderHiz_Degisti"/>
+                                <Border Grid.Column="1" Background="#050810" BorderBrush="#223A5070" BorderThickness="1" CornerRadius="2" Height="30" Margin="10,0,0,0">
+                                    <TextBlock x:Name="TxtHizDeger" Text="10,0 MB/s" Foreground="#00FFE5" FontFamily="Consolas" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <Button Content="1 MB/s" Width="75" Height="24" Margin="0,0,6,0" Background="Transparent" BorderBrush="#153A5070" BorderThickness="1" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="9" Cursor="Hand" Click="HizKisayol_Click" Tag="1024"/>
+                                <Button Content="10 MB/s" Width="75" Height="24" Margin="0,0,6,0" Background="Transparent" BorderBrush="#153A5070" BorderThickness="1" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="9" Cursor="Hand" Click="HizKisayol_Click" Tag="10240"/>
+                                <Button Content="50 MB/s" Width="75" Height="24" Margin="0,0,6,0" Background="Transparent" BorderBrush="#153A5070" BorderThickness="1" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="9" Cursor="Hand" Click="HizKisayol_Click" Tag="51200"/>
+                                <Button Content="100 MB/s" Width="75" Height="24" Margin="0,0,6,0" Background="Transparent" BorderBrush="#153A5070" BorderThickness="1" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="9" Cursor="Hand" Click="HizKisayol_Click" Tag="102400"/>
+                                <Button Content="125 MB/s" Width="75" Height="24" Margin="0,0,6,0" Background="Transparent" BorderBrush="#153A5070" BorderThickness="1" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="9" Cursor="Hand" Click="HizKisayol_Click" Tag="128000"/>
+                                <Button Content="1 GB/s" Width="75" Height="24" Background="Transparent" BorderBrush="#153A5070" BorderThickness="1" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="9" Cursor="Hand" Click="HizKisayol_Click" Tag="1048576"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Disk Önbelleği (RAM Disk Cache) -->
+                    <Border Background="#0A0F1E" BorderBrush="#1500FFE5" BorderThickness="1" CornerRadius="4" Padding="16,12" Margin="0,0,0,12">
+                        <StackPanel>
+                            <Grid>
+                                <TextBlock Text="DİSK YAZMA ÖNBELLEĞİ (RAM CACHE)" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="11" FontWeight="Bold"/>
+                                <TextBlock x:Name="TxtOnbellekGosterge" Text="80 KB" Foreground="#BD00FF" FontFamily="Consolas" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <Slider x:Name="SliderOnbellek" Minimum="1" Maximum="10" Value="5" IsSnapToTickEnabled="True" TickFrequency="1" Margin="0,12,0,0" ValueChanged="SliderOnbellek_Degisti"/>
+                            <TextBlock Text="Önbellek boyutunu yükseltmek disk performansını artırır ancak RAM kullanımını hafifçe yükseltir." Foreground="#5A7090" FontFamily="Consolas" FontSize="9" Margin="0,4,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Akıllı Sınıflandırma, Düşük Disk ve Otomatik Çıkartma -->
+                    <Grid Margin="0,4,0,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" HorizontalAlignment="Left">
+                            <TextBlock Text="AKILLI KATEGORİ" Foreground="#E0F0FF" FontFamily="Consolas" FontSize="10" FontWeight="Bold"/>
+                            <Border x:Name="ToggleAkilliKlasor" Width="50" Height="24" Margin="0,6,0,0" Background="#3300FFE5" BorderBrush="#3300FFE5" BorderThickness="1" CornerRadius="12" Cursor="Hand" MouseLeftButtonDown="ToggleAkilliKlasor_Click" HorizontalAlignment="Left">
+                                <Ellipse x:Name="ToggleAkilliKlasorDaire" Width="18" Height="18" Fill="#3A5070" HorizontalAlignment="Left" Margin="3,0,0,0"/>
+                            </Border>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                            <TextBlock Text="DÜŞÜK DİSK MODU" Foreground="#E0F0FF" FontFamily="Consolas" FontSize="10" FontWeight="Bold"/>
+                            <Border x:Name="ToggleDusukDisk" Width="50" Height="24" Margin="0,6,0,0" Background="#3300FFE5" BorderBrush="#3300FFE5" BorderThickness="1" CornerRadius="12" Cursor="Hand" MouseLeftButtonDown="ToggleDusukDisk_Click" HorizontalAlignment="Left">
+                                <Ellipse x:Name="ToggleDusukDiskDaire" Width="18" Height="18" Fill="#3A5070" HorizontalAlignment="Left" Margin="3,0,0,0"/>
+                            </Border>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" HorizontalAlignment="Right">
+                            <TextBlock Text="ARŞİVLERİ ÇIKART" Foreground="#E0F0FF" FontFamily="Consolas" FontSize="10" FontWeight="Bold"/>
+                            <Border x:Name="ToggleOtoCikart" Width="50" Height="24" Margin="0,6,0,0" Background="#3300FFE5" BorderBrush="#3300FFE5" BorderThickness="1" CornerRadius="12" Cursor="Hand" MouseLeftButtonDown="ToggleOtoCikart_Click" HorizontalAlignment="Right">
+                                <Ellipse x:Name="ToggleOtoCikartDaire" Width="18" Height="18" Fill="#3A5070" HorizontalAlignment="Left" Margin="3,0,0,0"/>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+
+                <!-- 3. GÖRÜNÜM SEKMESİ (Neon Temalar) -->
+                <StackPanel x:Name="PanelGorunum" Visibility="Collapsed">
+                    <TextBlock Text="PARLAK NEON TEMALARI SEÇİN" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="10" FontWeight="Bold" Margin="0,0,0,12"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Tema Kartları -->
+                        <Border x:Name="KartCyan" Grid.Row="0" Grid.Column="0" Background="#0A0F1E" BorderBrush="#00FFE5" BorderThickness="2" CornerRadius="4" Height="64" Margin="4" Cursor="Hand" Tag="Cyan" MouseLeftButtonDown="TemaKart_Click">
+                            <TextBlock Text="CYAN NEON" Foreground="#00FFE5" FontFamily="Consolas" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border x:Name="KartPink" Grid.Row="0" Grid.Column="1" Background="#0A0F1E" BorderBrush="#FF006E" BorderThickness="2" CornerRadius="4" Height="64" Margin="4" Cursor="Hand" Tag="Pink" MouseLeftButtonDown="TemaKart_Click">
+                            <TextBlock Text="PINK NEON" Foreground="#FF006E" FontFamily="Consolas" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border x:Name="KartPurple" Grid.Row="0" Grid.Column="2" Background="#0A0F1E" BorderBrush="#BD00FF" BorderThickness="2" CornerRadius="4" Height="64" Margin="4" Cursor="Hand" Tag="Purple" MouseLeftButtonDown="TemaKart_Click">
+                            <TextBlock Text="PURPLE NEON" Foreground="#BD00FF" FontFamily="Consolas" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border x:Name="KartGreen" Grid.Row="1" Grid.Column="0" Background="#0A0F1E" BorderBrush="#39FF14" BorderThickness="2" CornerRadius="4" Height="64" Margin="4" Cursor="Hand" Tag="Green" MouseLeftButtonDown="TemaKart_Click">
+                            <TextBlock Text="GREEN NEON" Foreground="#39FF14" FontFamily="Consolas" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border x:Name="KartOrange" Grid.Row="1" Grid.Column="1" Background="#0A0F1E" BorderBrush="#FF8C00" BorderThickness="2" CornerRadius="4" Height="64" Margin="4" Cursor="Hand" Tag="Orange" MouseLeftButtonDown="TemaKart_Click">
+                            <TextBlock Text="ORANGE NEON" Foreground="#FF8C00" FontFamily="Consolas" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border x:Name="KartRed" Grid.Row="1" Grid.Column="2" Background="#0A0F1E" BorderBrush="#FF2244" BorderThickness="2" CornerRadius="4" Height="64" Margin="4" Cursor="Hand" Tag="Red" MouseLeftButtonDown="TemaKart_Click">
+                            <TextBlock Text="RED NEON" Foreground="#FF2244" FontFamily="Consolas" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                    <TextBlock x:Name="TxtAktifTema" Text="Cyan" Foreground="#00FFE5" FontFamily="Consolas" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,16,0,0"/>
+                </StackPanel>
+
+                <!-- 4. BAĞLANTI SEKMESİ (Proxy & Yapay Zeka) -->
+                <StackPanel x:Name="PanelAg" Visibility="Collapsed">
+                    <TextBlock Text="BAĞLANTI ve PROXY YAPILANDIRMASI" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="10" FontWeight="Bold" Margin="0,0,0,16"/>
+                    <Button Content="⚙ PROXY SUNUCUSUNU YAPILANDIR" Height="38" Margin="0,0,0,12" Background="Transparent" BorderBrush="#2200FFE5" BorderThickness="1" Foreground="#00FFE5" FontFamily="Consolas" FontSize="11" FontWeight="Bold" Cursor="Hand" Click="BtnProxyAc_Click"/>
+
+                    <Separator Height="1" Background="#1500FFE5" Margin="0,4,0,16"/>
+
+                    <TextBlock Text="YAPAY ZEKA (AI) İNDİRME ASİSTANI" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="10" FontWeight="Bold" Margin="0,0,0,12"/>
+                    <Button Content="🤖 AI DESTEKLİ İNDİRME ASİSTANINI AÇ" Height="38" Background="Transparent" BorderBrush="#3339FF14" BorderThickness="1" Foreground="#39FF14" FontFamily="Consolas" FontSize="11" FontWeight="Bold" Cursor="Hand" Click="BtnAIAsistanAc_Click"/>
+                </StackPanel>
+
+                <!-- 5. GELİŞMİŞ SEKME (Sistem Araçları & Dil Seçimi) -->
+                <Grid x:Name="PanelGelismis" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Sistem Araçları Butonları -->
+                    <StackPanel Grid.Row="0">
+                        <TextBlock Text="SİSTEM VE VERİ YÖNETİMİ" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="10" FontWeight="Bold" Margin="0,0,0,12"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Content="📋 Geçmişi Aç" Height="34" Margin="2" Background="Transparent" BorderBrush="#1500FFE5" BorderThickness="1" Foreground="#00FFE5" FontFamily="Consolas" FontSize="10" Cursor="Hand" Click="BtnGecmisAc_Click"/>
+                            <Button Content="⚡ Ultra Hız" Height="34" Grid.Column="1" Margin="2" Background="Transparent" BorderBrush="#1539FF14" BorderThickness="1" Foreground="#39FF14" FontFamily="Consolas" FontSize="10" Cursor="Hand" Click="BtnUltraHizAc_Click"/>
+                            <Button Content="☁ Bulut Depo" Height="34" Grid.Column="2" Margin="2" Background="Transparent" BorderBrush="#1500FFE5" BorderThickness="1" Foreground="#00FFE5" FontFamily="Consolas" FontSize="10" Cursor="Hand" Click="BtnBulutAc_Click"/>
+                        </Grid>
+                        <Grid Margin="0,6,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Content="🌐 FTP Tarayıcı" Height="34" Margin="2" Background="Transparent" BorderBrush="#1500FFE5" BorderThickness="1" Foreground="#00FFE5" FontFamily="Consolas" FontSize="10" Cursor="Hand" Click="BtnFTPAc_Click"/>
+                            <Button Content="⌨ Kısayollar" Height="34" Grid.Column="1" Margin="2" Background="Transparent" BorderBrush="#1500FFE5" BorderThickness="1" Foreground="#00FFE5" FontFamily="Consolas" FontSize="10" Cursor="Hand" Click="BtnKisayollarAc_Click"/>
+                            <Button Content="🔄 Oto Yenile" Height="34" Grid.Column="2" Margin="2" Background="Transparent" BorderBrush="#1500FFE5" BorderThickness="1" Foreground="#00FFE5" FontFamily="Consolas" FontSize="10" Cursor="Hand" Click="BtnYenidenDenemeAc_Click"/>
+                        </Grid>
+
+                        <!-- GÜNCELLEME KONTROL ALANI (YENİ EKLENDİ) -->
+                        <Separator Height="1" Background="#1500FFE5" Margin="0,8,0,10"/>
+                        <TextBlock Text="UYGULAMA GÜNCELLEMESİ (UPDATE)" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="TxtGuncellemeDurum" Text="Mevcut Sürüm: v1.0.0" Foreground="#5A7090" FontFamily="Consolas" FontSize="11" VerticalAlignment="Center"/>
+                            <Button x:Name="BtnGuncelleDenetle" Grid.Column="1" Content="⚙ Güncellemeleri Denetle" Height="34" Width="200" Background="Transparent" BorderBrush="#3900FFE5" BorderThickness="1" Foreground="#00FFE5" FontFamily="Consolas" FontSize="10" FontWeight="Bold" Cursor="Hand" Click="BtnGuncelleDenetle_Click"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <!-- Dil Seçimi -->
+                    <StackPanel Grid.Row="1" VerticalAlignment="Bottom" Margin="0,0,0,4">
+                        <Separator Height="1" Background="#1500FFE5" Margin="0,0,0,16"/>
+                        <TextBlock Text="DİL SEÇENEKLERİ (LANGUAGE)" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="BtnTR" Content="🇹🇷 Türkçe" Height="34" Margin="2" Background="Transparent" BorderBrush="#153A5070" BorderThickness="1" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="11" FontWeight="Bold" Cursor="Hand" Tag="TR" Click="BtnDil_Click"/>
+                            <Button x:Name="BtnEN" Content="🇬🇧 English" Height="34" Grid.Column="1" Margin="2" Background="Transparent" BorderBrush="#153A5070" BorderThickness="1" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="11" FontWeight="Bold" Cursor="Hand" Tag="EN" Click="BtnDil_Click"/>
+                            <Button x:Name="BtnDE" Content="🇩🇪 Deutsch" Height="34" Grid.Column="2" Margin="2" Background="Transparent" BorderBrush="#153A5070" BorderThickness="1" Foreground="#7A9CC0" FontFamily="Consolas" FontSize="11" FontWeight="Bold" Cursor="Hand" Tag="DE" Click="BtnDil_Click"/>
+                        </Grid>
+                        <TextBlock x:Name="TxtMevcutDil" Text="Aktif dil: 🇹🇷 Türkçe" Foreground="#00FFE5" FontFamily="Consolas" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+
+            <!-- ALT KAYDET / İPTAL BUTONLARI -->
+            <Border Grid.Row="3" BorderBrush="#1500FFE5" BorderThickness="0,1,0,0">
+                <Grid Margin="20,0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Button Content="İPTAL" Width="90" Height="34" Margin="0,0,10,0" Background="Transparent" BorderBrush="#22FF006E" BorderThickness="1" Foreground="#FF006E" FontFamily="Consolas" FontSize="11" FontWeight="Bold" Cursor="Hand" Click="Kapat_Click"/>
+                        <Button Content="⚙ KAYDET" Width="110" Height="34" Background="Transparent" BorderBrush="#3900FFE5" BorderThickness="1" Foreground="#00FFE5" FontFamily="Consolas" FontSize="11" FontWeight="Bold" Cursor="Hand" Click="Kaydet_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

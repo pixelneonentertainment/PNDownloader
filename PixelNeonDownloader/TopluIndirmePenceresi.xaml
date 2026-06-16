@@ -1,0 +1,185 @@
+﻿<Window x:Class="PixelNeonDownloader.TopluIndirmePenceresi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Toplu İndirme Ekle"
+        Height="480" Width="620"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Border Background="#0A0F1E"
+            BorderBrush="#2200FFE5"
+            BorderThickness="1"
+            CornerRadius="6">
+        <Border.Effect>
+            <DropShadowEffect Color="#00FFE5" BlurRadius="20"
+                              ShadowDepth="0" Opacity="0.3"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="56"/>
+            </Grid.RowDefinitions>
+
+            <!-- BAŞLIK BARBARI (Sürükleme Alanı) -->
+            <Border Grid.Row="0"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="Baslik_MouseLeftButtonDown">
+                <Grid Margin="16,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="➕ " Foreground="#00FFE5"
+                                   FontSize="14" VerticalAlignment="Center"/>
+                        <TextBlock Text="TOPLU İNDİRME EKLE"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="12" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✕"
+                            HorizontalAlignment="Right"
+                            Width="32" Height="32"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#FF2244"
+                            FontFamily="Consolas"
+                            Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- İÇERİK ALANI -->
+            <StackPanel Grid.Row="1" Margin="20,16">
+
+                <!-- Kayıt Yolu Seçimi -->
+                <TextBlock Text="KAYIT KLASÖRÜ"
+                           Foreground="#7A9CC0"
+                           FontFamily="Consolas"
+                           FontSize="10" FontWeight="Bold"
+                           Margin="0,0,0,6"/>
+                <Grid Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="80"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="TxtKayitYolu"
+                             Grid.Column="0"
+                             Height="34"
+                             IsReadOnly="True"
+                             Background="#050810"
+                             Foreground="#E0F0FF"
+                             BorderBrush="#223A5070"
+                             BorderThickness="1"
+                             FontFamily="Consolas"
+                             FontSize="12"
+                             Padding="8,6,8,6"
+                             VerticalContentAlignment="Center"/>
+                    <Button Grid.Column="1"
+                            Content="SEÇ"
+                            Height="34"
+                            Margin="8,0,0,0"
+                            Background="Transparent"
+                            BorderBrush="#3900FFE5"
+                            BorderThickness="1"
+                            Foreground="#00FFE5"
+                            FontFamily="Consolas"
+                            FontSize="11" FontWeight="Bold"
+                            Cursor="Hand"
+                            Click="KlasorSec_Click"/>
+                </Grid>
+
+                <!-- Link Başlığı ve Panodan Yapıştır Butonu -->
+                <Grid Margin="0,0,0,6">
+                    <TextBlock Text="İNDİRİLECEK URL LİSTESİ (Her satıra bir link)"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               VerticalAlignment="Center"/>
+                    <Button Content="📋 PANODAN YAPIŞTIR"
+                            HorizontalAlignment="Right"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#00FFE5"
+                            FontFamily="Consolas"
+                            FontSize="10" FontWeight="Bold"
+                            Cursor="Hand"
+                            Click="BtnPanoYapistir_Click"/>
+                </Grid>
+
+                <!-- Link Giriş Kutusu -->
+                <TextBox x:Name="TxtLinkler"
+                         Height="160"
+                         AcceptsReturn="True"
+                         VerticalScrollBarVisibility="Auto"
+                         Background="#050810"
+                         Foreground="#E0F0FF"
+                         BorderBrush="#223A5070"
+                         BorderThickness="1"
+                         FontFamily="Consolas"
+                         FontSize="12"
+                         Padding="8"
+                         LostFocus="TxtLinkler_LostFocus"/>
+
+                <!-- Durum ve İstatistik Özet Paneli -->
+                <Grid Margin="0,12,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Toplam: " Foreground="#7A9CC0" FontFamily="Consolas" FontSize="11"/>
+                        <TextBlock x:Name="TxtToplamSayisi" Text="0" Foreground="#E0F0FF" FontFamily="Consolas" FontSize="11" FontWeight="Bold" Margin="0,0,12,0"/>
+
+                        <TextBlock Text="Geçerli: " Foreground="#7A9CC0" FontFamily="Consolas" FontSize="11"/>
+                        <TextBlock x:Name="TxtGecerliSayisi" Text="0" Foreground="#39FF14" FontFamily="Consolas" FontSize="11" FontWeight="Bold" Margin="0,0,12,0"/>
+
+                        <TextBlock Text="Geçersiz: " Foreground="#7A9CC0" FontFamily="Consolas" FontSize="11"/>
+                        <TextBlock x:Name="TxtGecersizSayisi" Text="0" Foreground="#FF2244" FontFamily="Consolas" FontSize="11" FontWeight="Bold"/>
+                    </StackPanel>
+
+                    <TextBlock x:Name="TxtDurum"
+                               Text="Hazır"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="11"
+                               HorizontalAlignment="Right"/>
+                </Grid>
+
+            </StackPanel>
+
+            <!-- ALT BUTONLAR (Kapat / Ekle) -->
+            <Border Grid.Row="2"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,1,0,0">
+                <Grid Margin="20,0">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center">
+                        <Button Content="İPTAL"
+                                Width="90" Height="34"
+                                Margin="0,0,10,0"
+                                Background="Transparent"
+                                BorderBrush="#22FF006E" BorderThickness="1"
+                                Foreground="#FF006E"
+                                FontFamily="Consolas"
+                                FontSize="11" FontWeight="Bold"
+                                Cursor="Hand"
+                                Click="Kapat_Click"/>
+                        <Button x:Name="BtnTopluEkle"
+                                Content="⚡ TOPLU EKLE"
+                                Width="130" Height="34"
+                                Background="Transparent"
+                                BorderBrush="#3900FFE5" BorderThickness="1"
+                                Foreground="#00FFE5"
+                                FontFamily="Consolas"
+                                FontSize="11" FontWeight="Bold"
+                                Cursor="Hand"
+                                IsEnabled="False"
+                                Click="BtnTopluEkle_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

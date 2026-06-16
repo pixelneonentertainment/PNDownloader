@@ -1,0 +1,300 @@
+﻿<Window x:Class="PixelNeonDownloader.TorrentPenceresi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Torrent Ekle"
+        Height="520" Width="700"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Border Background="#0A0F1E"
+            BorderBrush="#2200FFE5"
+            BorderThickness="1"
+            CornerRadius="6">
+        <Border.Effect>
+            <DropShadowEffect Color="#00FFE5" BlurRadius="20"
+                              ShadowDepth="0" Opacity="0.3"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="56"/>
+            </Grid.RowDefinitions>
+
+            <!-- BAŞLIK -->
+            <Border Grid.Row="0"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="Baslik_MouseLeftButtonDown">
+                <Grid Margin="16,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="⟁ " Foreground="#00FFE5"
+                                   FontSize="14" VerticalAlignment="Center"/>
+                        <TextBlock Text="TORRENT EKLE"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="12" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✕"
+                            HorizontalAlignment="Right"
+                            Width="32" Height="32"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#FF2244"
+                            FontFamily="Consolas"
+                            Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- İÇERİK -->
+            <Grid Grid.Row="1" Margin="16,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- SOL: Torrent Bilgileri -->
+                <StackPanel Grid.Column="0">
+
+                    <!-- Torrent Adı -->
+                    <TextBlock Text="TORRENT ADI"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,0,0,6"/>
+                    <TextBox x:Name="TxtTorrentAdi"
+                             Height="34"
+                             Background="#050810"
+                             Foreground="#E0F0FF"
+                             BorderBrush="#223A5070"
+                             BorderThickness="1"
+                             FontFamily="Consolas"
+                             FontSize="11"
+                             Padding="8,6"
+                             CaretBrush="#00FFE5"
+                             IsReadOnly="True"/>
+
+                    <!-- Toplam Boyut -->
+                    <TextBlock Text="TOPLAM BOYUT"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,12,0,6"/>
+                    <TextBox x:Name="TxtToplamBoyut"
+                             Height="34"
+                             Background="#050810"
+                             Foreground="#39FF14"
+                             BorderBrush="#223A5070"
+                             BorderThickness="1"
+                             FontFamily="Consolas"
+                             FontSize="11"
+                             Padding="8,6"
+                             IsReadOnly="True"/>
+
+                    <!-- Kayıt Yolu -->
+                    <TextBlock Text="KAYIT KLASÖRÜ"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,12,0,6"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="TxtKayitYolu"
+                                 Grid.Column="0"
+                                 Height="34"
+                                 Background="#050810"
+                                 Foreground="#E0F0FF"
+                                 BorderBrush="#223A5070"
+                                 BorderThickness="1"
+                                 FontFamily="Consolas"
+                                 FontSize="10"
+                                 Padding="8,6"
+                                 CaretBrush="#00FFE5"/>
+                        <Button Grid.Column="1"
+                                Content="📁"
+                                Height="34"
+                                Margin="4,0,0,0"
+                                Background="Transparent"
+                                BorderBrush="#2200FFE5"
+                                BorderThickness="1"
+                                FontSize="14"
+                                Cursor="Hand"
+                                Click="KlasorSec_Click"/>
+                    </Grid>
+
+                    <!-- Kategori -->
+                    <TextBlock Text="KATEGORİ"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,12,0,6"/>
+                    <ComboBox x:Name="CmbKategori"
+                              Height="34"
+                              FontFamily="Consolas"
+                              FontSize="11"
+                              SelectedIndex="0">
+                        <ComboBoxItem Content="Genel"/>
+                        <ComboBoxItem Content="Video"/>
+                        <ComboBoxItem Content="Müzik"/>
+                        <ComboBoxItem Content="Yazılım"/>
+                        <ComboBoxItem Content="Oyun"/>
+                        <ComboBoxItem Content="Belge"/>
+                    </ComboBox>
+
+                    <!-- Seçenekler -->
+                    <StackPanel Margin="0,16,0,0">
+                        <CheckBox x:Name="ChkHemenBaslat"
+                                  IsChecked="True"
+                                  Foreground="#7A9CC0"
+                                  FontFamily="Consolas"
+                                  FontSize="11"
+                                  Content="Hemen başlat"
+                                  Margin="0,0,0,8"/>
+                        <CheckBox x:Name="ChkOtomatikCikart"
+                                  IsChecked="True"
+                                  Foreground="#7A9CC0"
+                                  FontFamily="Consolas"
+                                  FontSize="11"
+                                  Content="Tamamlanınca arşivi çıkart"/>
+                    </StackPanel>
+
+                </StackPanel>
+
+                <!-- SAĞ: Dosya Listesi -->
+                <StackPanel Grid.Column="2">
+
+                    <Grid Margin="0,0,0,6">
+                        <TextBlock Text="TORRENT İÇERİĞİ"
+                                   Foreground="#7A9CC0"
+                                   FontFamily="Consolas"
+                                   FontSize="10" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Right">
+                            <Button Content="Tümü"
+                                    Height="22" Padding="8,0"
+                                    Margin="0,0,4,0"
+                                    Background="Transparent"
+                                    BorderBrush="#2200FFE5"
+                                    BorderThickness="1"
+                                    Foreground="#00FFE5"
+                                    FontFamily="Consolas"
+                                    FontSize="9"
+                                    Cursor="Hand"
+                                    Click="TumunuSec_Click"/>
+                            <Button Content="Hiçbiri"
+                                    Height="22" Padding="8,0"
+                                    Background="Transparent"
+                                    BorderBrush="#22FF006E"
+                                    BorderThickness="1"
+                                    Foreground="#FF006E"
+                                    FontFamily="Consolas"
+                                    FontSize="9"
+                                    Cursor="Hand"
+                                    Click="HicbiriniSec_Click"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Dosya Listesi -->
+                    <Border Background="#050810"
+                            BorderBrush="#223A5070"
+                            BorderThickness="1"
+                            CornerRadius="2"
+                            Height="300">
+                        <ListView x:Name="DosyaListesi"
+                                  Background="Transparent"
+                                  BorderThickness="0"
+                                  Foreground="#E0F0FF">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="30">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding Secili}"
+                                                          Foreground="#00FFE5"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="DOSYA ADI" Width="180">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Ad}"
+                                                           Foreground="#E0F0FF"
+                                                           FontFamily="Consolas"
+                                                           FontSize="10"
+                                                           TextTrimming="CharacterEllipsis"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="BOYUT" Width="80">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding BoyutMetni}"
+                                                           Foreground="#7A9CC0"
+                                                           FontFamily="Consolas"
+                                                           FontSize="10"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Border>
+
+                    <!-- Seçili Boyut -->
+                    <TextBlock x:Name="TxtSeciliBoyut"
+                               Text="Seçili: 0 B"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10"
+                               Margin="0,6,0,0"/>
+
+                </StackPanel>
+            </Grid>
+
+            <!-- ALT BUTONLAR -->
+            <Border Grid.Row="2"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,1,0,0">
+                <Grid Margin="16,0">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center">
+                        <Button Content="İPTAL"
+                                Width="90" Height="34"
+                                Margin="0,0,10,0"
+                                Background="Transparent"
+                                BorderBrush="#22FF006E"
+                                BorderThickness="1"
+                                Foreground="#FF006E"
+                                FontFamily="Consolas"
+                                FontSize="11" FontWeight="Bold"
+                                Cursor="Hand"
+                                Click="Kapat_Click"/>
+                        <Button Content="⟁  EKLE"
+                                Width="110" Height="34"
+                                Background="Transparent"
+                                BorderBrush="#3900FFE5"
+                                BorderThickness="1"
+                                Foreground="#00FFE5"
+                                FontFamily="Consolas"
+                                FontSize="11" FontWeight="Bold"
+                                Cursor="Hand"
+                                Click="Ekle_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,377 @@
+﻿<Window x:Class="PixelNeonDownloader.KaynakIzlePenceresi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kaynak İzleme"
+        Height="560" Width="520"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Border Background="#0A0F1E"
+            BorderBrush="#2200FFE5"
+            BorderThickness="1"
+            CornerRadius="6">
+        <Border.Effect>
+            <DropShadowEffect Color="#00FFE5" BlurRadius="20"
+                              ShadowDepth="0" Opacity="0.3"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="44"/>
+            </Grid.RowDefinitions>
+
+            <!-- BAŞLIK -->
+            <Border Grid.Row="0"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="Baslik_MouseLeftButtonDown">
+                <Grid Margin="16,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="📡 " Foreground="#00FFE5"
+                                   FontSize="14" VerticalAlignment="Center"/>
+                        <TextBlock Text="KAYNAK İZLEME"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="12" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✕"
+                            HorizontalAlignment="Right"
+                            Width="32" Height="32"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#FF2244"
+                            FontFamily="Consolas"
+                            Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- İÇERİK -->
+            <ScrollViewer Grid.Row="1"
+                          VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="16,12">
+
+                    <!-- Dosya Bilgisi -->
+                    <Border Background="#0D1428"
+                            BorderBrush="#1500FFE5"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="14,10"
+                            Margin="0,0,0,12">
+                        <StackPanel>
+                            <TextBlock Text="DOSYA"
+                                       Foreground="#3A5070"
+                                       FontFamily="Consolas"
+                                       FontSize="9" FontWeight="Bold"/>
+                            <TextBlock x:Name="TxtDosyaAdi"
+                                       Foreground="#00FFE5"
+                                       FontFamily="Consolas"
+                                       FontSize="12" FontWeight="Bold"
+                                       TextTrimming="CharacterEllipsis"
+                                       Margin="0,4,0,0"/>
+                            <TextBlock x:Name="TxtUrl"
+                                       Foreground="#3A5070"
+                                       FontFamily="Consolas"
+                                       FontSize="9"
+                                       TextTrimming="CharacterEllipsis"
+                                       Margin="0,2,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Sunucu Bilgisi -->
+                    <TextBlock Text="SUNUCU BİLGİSİ"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,0,0,8"/>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- IP Adresi -->
+                        <Border Grid.Column="0"
+                                Background="#0D1428"
+                                BorderBrush="#1500FFE5"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="12,10">
+                            <StackPanel>
+                                <TextBlock Text="IP ADRESİ"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="9" FontWeight="Bold"/>
+                                <TextBlock x:Name="TxtIP"
+                                           Text="--"
+                                           Foreground="#00FFE5"
+                                           FontFamily="Consolas"
+                                           FontSize="13" FontWeight="Bold"
+                                           Margin="0,4,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Port -->
+                        <Border Grid.Column="2"
+                                Background="#0D1428"
+                                BorderBrush="#1500FFE5"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="12,10">
+                            <StackPanel>
+                                <TextBlock Text="PORT"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="9" FontWeight="Bold"/>
+                                <TextBlock x:Name="TxtPort"
+                                           Text="--"
+                                           Foreground="#00FFE5"
+                                           FontFamily="Consolas"
+                                           FontSize="13" FontWeight="Bold"
+                                           Margin="0,4,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <!-- Ping ve Yanıt -->
+                    <TextBlock Text="BAĞLANTI KALİTESİ"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,0,0,8"/>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Ping -->
+                        <Border Grid.Column="0"
+                                Background="#0D1428"
+                                BorderBrush="#1500FFE5"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="10,10">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="PING"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="9" FontWeight="Bold"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock x:Name="TxtPing"
+                                           Text="--"
+                                           Foreground="#00FFE5"
+                                           FontFamily="Consolas"
+                                           FontSize="20" FontWeight="Bold"
+                                           HorizontalAlignment="Center"
+                                           Margin="0,4,0,0"/>
+                                <TextBlock Text="ms"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="9"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Yanıt Süresi -->
+                        <Border Grid.Column="2"
+                                Background="#0D1428"
+                                BorderBrush="#1500FFE5"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="10,10">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="YANIT SÜRESİ"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="9" FontWeight="Bold"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock x:Name="TxtYanitSuresi"
+                                           Text="--"
+                                           Foreground="#FFD700"
+                                           FontFamily="Consolas"
+                                           FontSize="20" FontWeight="Bold"
+                                           HorizontalAlignment="Center"
+                                           Margin="0,4,0,0"/>
+                                <TextBlock Text="ms"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="9"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Kararlılık -->
+                        <Border Grid.Column="4"
+                                Background="#0D1428"
+                                BorderBrush="#1500FFE5"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="10,10">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="KARARLILIK"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="9" FontWeight="Bold"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock x:Name="TxtKararlilik"
+                                           Text="--"
+                                           Foreground="#39FF14"
+                                           FontFamily="Consolas"
+                                           FontSize="20" FontWeight="Bold"
+                                           HorizontalAlignment="Center"
+                                           Margin="0,4,0,0"/>
+                                <TextBlock Text="%"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="9"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <!-- Ping Geçmişi Grafiği -->
+                    <TextBlock Text="PING GEÇMİŞİ"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,0,0,8"/>
+
+                    <Border Background="#0D1428"
+                            BorderBrush="#1500FFE5"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Height="80"
+                            Margin="0,0,0,12">
+                        <Canvas x:Name="PingGrafik" Margin="8"/>
+                    </Border>
+
+                    <!-- Sunucu Detayları -->
+                    <TextBlock Text="SUNUCU DETAYLARI"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,0,0,8"/>
+
+                    <Border Background="#0D1428"
+                            BorderBrush="#1500FFE5"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="14,12"
+                            Margin="0,0,0,12">
+                        <StackPanel>
+                            <Grid Margin="0,0,0,6">
+                                <TextBlock Text="SUNUCU"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="10"/>
+                                <TextBlock x:Name="TxtSunucu"
+                                           Text="--"
+                                           Foreground="#E0F0FF"
+                                           FontFamily="Consolas"
+                                           FontSize="10"
+                                           HorizontalAlignment="Right"/>
+                            </Grid>
+                            <Grid Margin="0,0,0,6">
+                                <TextBlock Text="İÇERİK TÜRÜ"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="10"/>
+                                <TextBlock x:Name="TxtIcerikTuru"
+                                           Text="--"
+                                           Foreground="#E0F0FF"
+                                           FontFamily="Consolas"
+                                           FontSize="10"
+                                           HorizontalAlignment="Right"/>
+                            </Grid>
+                            <Grid Margin="0,0,0,6">
+                                <TextBlock Text="ÇOKLU PARÇA"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="10"/>
+                                <TextBlock x:Name="TxtCokluParca"
+                                           Text="--"
+                                           Foreground="#E0F0FF"
+                                           FontFamily="Consolas"
+                                           FontSize="10"
+                                           HorizontalAlignment="Right"/>
+                            </Grid>
+                            <Grid Margin="0,0,0,6">
+                                <TextBlock Text="PROTOKOL"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="10"/>
+                                <TextBlock x:Name="TxtProtokol"
+                                           Text="--"
+                                           Foreground="#E0F0FF"
+                                           FontFamily="Consolas"
+                                           FontSize="10"
+                                           HorizontalAlignment="Right"/>
+                            </Grid>
+                            <Grid>
+                                <TextBlock Text="BAĞLANTI DURUMU"
+                                           Foreground="#3A5070"
+                                           FontFamily="Consolas"
+                                           FontSize="10"/>
+                                <TextBlock x:Name="TxtBaglantiDurumu"
+                                           Text="--"
+                                           FontFamily="Consolas"
+                                           FontSize="10" FontWeight="Bold"
+                                           HorizontalAlignment="Right"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Yenile Butonu -->
+                    <Button x:Name="BtnYenile"
+                            Content="🔄  YENİLE"
+                            Height="34"
+                            Background="Transparent"
+                            BorderBrush="#2200FFE5" BorderThickness="1"
+                            Foreground="#00FFE5"
+                            FontFamily="Consolas" FontSize="11" FontWeight="Bold"
+                            Cursor="Hand"
+                            Click="BtnYenile_Click"/>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- ALT -->
+            <Border Grid.Row="2"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,1,0,0">
+                <Grid Margin="16,0">
+                    <TextBlock x:Name="TxtSonGuncelleme"
+                               Text="Analiz bekleniyor..."
+                               Foreground="#3A5070"
+                               FontFamily="Consolas"
+                               FontSize="10"
+                               VerticalAlignment="Center"/>
+                    <Button Content="KAPAT"
+                            Width="100" Height="32"
+                            HorizontalAlignment="Right"
+                            Background="Transparent"
+                            BorderBrush="#2200FFE5" BorderThickness="1"
+                            Foreground="#00FFE5"
+                            FontFamily="Consolas"
+                            FontSize="11" FontWeight="Bold"
+                            Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

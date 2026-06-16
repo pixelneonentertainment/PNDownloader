@@ -1,0 +1,271 @@
+﻿<Window x:Class="PixelNeonDownloader.ChecksumPenceresi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Checksum Kontrolü"
+        Height="520" Width="520"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Border Background="#0A0F1E"
+            BorderBrush="#2200FFE5"
+            BorderThickness="1"
+            CornerRadius="6">
+        <Border.Effect>
+            <DropShadowEffect Color="#00FFE5" BlurRadius="20"
+                              ShadowDepth="0" Opacity="0.3"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="56"/>
+            </Grid.RowDefinitions>
+
+            <!-- BAŞLIK -->
+            <Border Grid.Row="0"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="Baslik_MouseLeftButtonDown">
+                <Grid Margin="16,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="🔐 " Foreground="#00FFE5"
+                                   FontSize="14" VerticalAlignment="Center"/>
+                        <TextBlock Text="CHECKSUM KONTROLÜ"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="12" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✕"
+                            HorizontalAlignment="Right"
+                            Width="32" Height="32"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#FF2244"
+                            FontFamily="Consolas"
+                            Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- İÇERİK -->
+            <ScrollViewer Grid.Row="1"
+                          VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="20,16">
+
+                    <!-- Dosya Bilgisi -->
+                    <Border Background="#0D1428"
+                            BorderBrush="#1500FFE5"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="14,10"
+                            Margin="0,0,0,14">
+                        <StackPanel>
+                            <TextBlock Text="DOSYA"
+                                       Foreground="#3A5070"
+                                       FontFamily="Consolas"
+                                       FontSize="9" FontWeight="Bold"/>
+                            <TextBlock x:Name="TxtDosyaAdi"
+                                       Foreground="#00FFE5"
+                                       FontFamily="Consolas"
+                                       FontSize="12" FontWeight="Bold"
+                                       TextTrimming="CharacterEllipsis"
+                                       Margin="0,4,0,0"/>
+                            <TextBlock x:Name="TxtDosyaYolu"
+                                       Foreground="#3A5070"
+                                       FontFamily="Consolas"
+                                       FontSize="9"
+                                       TextTrimming="CharacterEllipsis"
+                                       Margin="0,2,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Algoritma Seçimi -->
+                    <TextBlock Text="ALGORİTMA"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,0,0,8"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
+                        <RadioButton x:Name="RdoMD5" Content="MD5"
+                                     Foreground="#E0F0FF" FontFamily="Consolas"
+                                     FontSize="11" Margin="0,0,16,0"
+                                     GroupName="Algoritma"/>
+                        <RadioButton x:Name="RdoSHA1" Content="SHA-1"
+                                     Foreground="#E0F0FF" FontFamily="Consolas"
+                                     FontSize="11" Margin="0,0,16,0"
+                                     GroupName="Algoritma"/>
+                        <RadioButton x:Name="RdoSHA256" Content="SHA-256"
+                                     IsChecked="True"
+                                     Foreground="#E0F0FF" FontFamily="Consolas"
+                                     FontSize="11" Margin="0,0,16,0"
+                                     GroupName="Algoritma"/>
+                        <RadioButton x:Name="RdoSHA512" Content="SHA-512"
+                                     Foreground="#E0F0FF" FontFamily="Consolas"
+                                     FontSize="11"
+                                     GroupName="Algoritma"/>
+                    </StackPanel>
+
+                    <!-- Beklenen Hash -->
+                    <TextBlock Text="BEKLENEN HASH (Opsiyonel)"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,0,0,6"/>
+                    <TextBox x:Name="TxtBeklenenHash"
+                             Height="38"
+                             Background="#050810" Foreground="#E0F0FF"
+                             BorderBrush="#223A5070" BorderThickness="1"
+                             FontFamily="Consolas" FontSize="11"
+                             Padding="10,8" CaretBrush="#00FFE5"
+                             TextChanged="TxtBeklenenHash_Degisti"
+                             Margin="0,0,0,6"/>
+                    <TextBlock x:Name="TxtAlgoritmaHint"
+                               Text=""
+                               Foreground="#3A5070"
+                               FontFamily="Consolas"
+                               FontSize="9"
+                               Margin="0,0,0,14"/>
+
+                    <!-- İlerleme -->
+                    <ProgressBar x:Name="PrgHesaplama"
+                                 Height="4"
+                                 Value="0" Maximum="100"
+                                 Background="#0D1428"
+                                 BorderThickness="0"
+                                 Visibility="Collapsed"
+                                 Margin="0,0,0,14">
+                        <ProgressBar.Foreground>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#FF00FFE5" Offset="0"/>
+                                <GradientStop Color="#FFBD00FF" Offset="1"/>
+                            </LinearGradientBrush>
+                        </ProgressBar.Foreground>
+                    </ProgressBar>
+
+                    <!-- Sonuç Paneli -->
+                    <Border x:Name="SonucPaneli"
+                            Background="#0D1428"
+                            BorderBrush="#1500FFE5"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="14,12"
+                            Margin="0,0,0,14"
+                            Visibility="Collapsed">
+                        <StackPanel>
+
+                            <!-- Sonuç İkonu -->
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        Margin="0,0,0,12">
+                                <TextBlock x:Name="TxtSonucIkon"
+                                           FontSize="32"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock x:Name="TxtSonucBaslik"
+                                           Foreground="#00FFE5"
+                                           FontFamily="Consolas"
+                                           FontSize="16" FontWeight="Bold"
+                                           VerticalAlignment="Center"
+                                           Margin="12,0,0,0"/>
+                            </StackPanel>
+
+                            <!-- Hesaplanan Hash -->
+                            <TextBlock Text="HESAPLANAN HASH"
+                                       Foreground="#3A5070"
+                                       FontFamily="Consolas"
+                                       FontSize="9" FontWeight="Bold"
+                                       Margin="0,0,0,4"/>
+                            <Border Background="#050810"
+                                    BorderBrush="#1500FFE5"
+                                    BorderThickness="1"
+                                    CornerRadius="2"
+                                    Padding="8,6"
+                                    Margin="0,0,0,10">
+                                <Grid>
+                                    <TextBlock x:Name="TxtHesaplananHash"
+                                               Foreground="#00FFE5"
+                                               FontFamily="Consolas"
+                                               FontSize="10"
+                                               TextWrapping="Wrap"/>
+                                    <Button x:Name="BtnKopyala"
+                                            Content="📋"
+                                            HorizontalAlignment="Right"
+                                            Width="28" Height="24"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            FontSize="12"
+                                            Cursor="Hand"
+                                            Click="BtnKopyala_Click"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- Karşılaştırma -->
+                            <Border x:Name="KarsilastirmaPaneli"
+                                    Background="#060C1A"
+                                    BorderBrush="#1500FFE5"
+                                    BorderThickness="1"
+                                    CornerRadius="2"
+                                    Padding="8,6"
+                                    Visibility="Collapsed">
+                                <StackPanel>
+                                    <TextBlock Text="BEKLENEN HASH"
+                                               Foreground="#3A5070"
+                                               FontFamily="Consolas"
+                                               FontSize="9" FontWeight="Bold"
+                                               Margin="0,0,0,4"/>
+                                    <TextBlock x:Name="TxtBeklenenHashGoster"
+                                               Foreground="#7A9CC0"
+                                               FontFamily="Consolas"
+                                               FontSize="10"
+                                               TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Border>
+
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Hesapla Butonu -->
+                    <Button x:Name="BtnHesapla"
+                            Content="🔐  HESAPLA ve DOĞRULA"
+                            Height="36"
+                            Background="Transparent"
+                            BorderBrush="#3900FFE5" BorderThickness="1"
+                            Foreground="#00FFE5"
+                            FontFamily="Consolas" FontSize="11" FontWeight="Bold"
+                            Cursor="Hand"
+                            Click="BtnHesapla_Click"/>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- ALT BUTONLAR -->
+            <Border Grid.Row="2"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,1,0,0">
+                <Grid Margin="20,0">
+                    <TextBlock x:Name="TxtDurum"
+                               Text="Hazır"
+                               Foreground="#3A5070"
+                               FontFamily="Consolas" FontSize="10"
+                               VerticalAlignment="Center"/>
+                    <Button Content="KAPAT"
+                            Width="100" Height="32"
+                            HorizontalAlignment="Right"
+                            Background="Transparent"
+                            BorderBrush="#2200FFE5" BorderThickness="1"
+                            Foreground="#00FFE5"
+                            FontFamily="Consolas"
+                            FontSize="11" FontWeight="Bold"
+                            Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

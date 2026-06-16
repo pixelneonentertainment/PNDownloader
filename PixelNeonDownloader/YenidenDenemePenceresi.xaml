@@ -1,0 +1,240 @@
+﻿<Window x:Class="PixelNeonDownloader.YenidenDenemePenceresi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Otomatik Yeniden Deneme"
+        Height="380" Width="460"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Border Background="#0A0F1E"
+            BorderBrush="#2200FFE5"
+            BorderThickness="1"
+            CornerRadius="6">
+        <Border.Effect>
+            <DropShadowEffect Color="#00FFE5" BlurRadius="20"
+                              ShadowDepth="0" Opacity="0.3"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="56"/>
+            </Grid.RowDefinitions>
+
+            <!-- BAŞLIK -->
+            <Border Grid.Row="0"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="Baslik_MouseLeftButtonDown">
+                <Grid Margin="16,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="🔄 " Foreground="#00FFE5"
+                                   FontSize="14" VerticalAlignment="Center"/>
+                        <TextBlock Text="OTOMATİK YENİDEN DENEME"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="12" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✕"
+                            HorizontalAlignment="Right"
+                            Width="32" Height="32"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#FF2244"
+                            FontFamily="Consolas"
+                            Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- İÇERİK -->
+            <StackPanel Grid.Row="1" Margin="20,16">
+
+                <!-- Aktif Toggle -->
+                <Border Background="#0D1428"
+                        BorderBrush="#1500FFE5"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="14,12"
+                        Margin="0,0,0,12">
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock Text="OTOMATİK YENİDEN DENEME"
+                                       Foreground="#E0F0FF"
+                                       FontFamily="Consolas"
+                                       FontSize="11" FontWeight="Bold"/>
+                            <TextBlock Text="Hata verince otomatik tekrar dene"
+                                       Foreground="#7A9CC0"
+                                       FontFamily="Consolas"
+                                       FontSize="10" Margin="0,4,0,0"/>
+                        </StackPanel>
+                        <Border x:Name="ToggleAktif"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Width="48" Height="26"
+                                CornerRadius="13" Cursor="Hand"
+                                MouseLeftButtonDown="ToggleAktif_Click">
+                            <Ellipse x:Name="ToggleAktifDaire"
+                                     Width="20" Height="20"
+                                     Margin="25,0,0,0"/>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!-- Deneme Sayısı -->
+                <Border Background="#0D1428"
+                        BorderBrush="#1500FFE5"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="14,12"
+                        Margin="0,0,0,12">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,8">
+                            <TextBlock Text="MAKSİMUM DENEME SAYISI"
+                                       Foreground="#E0F0FF"
+                                       FontFamily="Consolas"
+                                       FontSize="11" FontWeight="Bold"
+                                       VerticalAlignment="Center"/>
+                            <TextBlock x:Name="TxtDenemeSayisiGosterge"
+                                       Text="3 deneme"
+                                       Foreground="#00FFE5"
+                                       FontFamily="Consolas"
+                                       FontSize="11" FontWeight="Bold"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                        <Slider x:Name="SliderDenemeSayisi"
+                                Minimum="1" Maximum="10" Value="3"
+                                TickFrequency="1" IsSnapToTickEnabled="True"
+                                Foreground="#00FFE5"
+                                ValueChanged="SliderDenemeSayisi_Degisti"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                            <Button Content="1x" Height="22" Padding="8,0"
+                                    Margin="0,0,4,0" Background="Transparent"
+                                    BorderBrush="#223A5070" BorderThickness="1"
+                                    Foreground="#7A9CC0" FontFamily="Consolas"
+                                    FontSize="9" Cursor="Hand" Tag="1"
+                                    Click="DenemeKisayol_Click"/>
+                            <Button Content="3x" Height="22" Padding="8,0"
+                                    Margin="0,0,4,0" Background="Transparent"
+                                    BorderBrush="#2200FFE5" BorderThickness="1"
+                                    Foreground="#00FFE5" FontFamily="Consolas"
+                                    FontSize="9" Cursor="Hand" Tag="3"
+                                    Click="DenemeKisayol_Click"/>
+                            <Button Content="5x" Height="22" Padding="8,0"
+                                    Margin="0,0,4,0" Background="Transparent"
+                                    BorderBrush="#223A5070" BorderThickness="1"
+                                    Foreground="#7A9CC0" FontFamily="Consolas"
+                                    FontSize="9" Cursor="Hand" Tag="5"
+                                    Click="DenemeKisayol_Click"/>
+                            <Button Content="10x" Height="22" Padding="8,0"
+                                    Background="Transparent"
+                                    BorderBrush="#223A5070" BorderThickness="1"
+                                    Foreground="#7A9CC0" FontFamily="Consolas"
+                                    FontSize="9" Cursor="Hand" Tag="10"
+                                    Click="DenemeKisayol_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Bekleme Aralığı -->
+                <Border Background="#0D1428"
+                        BorderBrush="#1500FFE5"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="14,12"
+                        Margin="0,0,0,12">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,8">
+                            <TextBlock Text="BEKLEME ARALIĞI"
+                                       Foreground="#E0F0FF"
+                                       FontFamily="Consolas"
+                                       FontSize="11" FontWeight="Bold"
+                                       VerticalAlignment="Center"/>
+                            <TextBlock x:Name="TxtBeklemeGosterge"
+                                       Text="5 saniye"
+                                       Foreground="#00FFE5"
+                                       FontFamily="Consolas"
+                                       FontSize="11" FontWeight="Bold"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                        <Slider x:Name="SliderBekleme"
+                                Minimum="1" Maximum="60" Value="5"
+                                TickFrequency="1" IsSnapToTickEnabled="True"
+                                Foreground="#00FFE5"
+                                ValueChanged="SliderBekleme_Degisti"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Artan Bekleme -->
+                <Border Background="#0D1428"
+                        BorderBrush="#1500FFE5"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="14,12">
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock Text="ARTAN BEKLEME SÜRESİ"
+                                       Foreground="#E0F0FF"
+                                       FontFamily="Consolas"
+                                       FontSize="11" FontWeight="Bold"/>
+                            <TextBlock Text="Her denemede bekleme süresi 2 katına çıkar"
+                                       Foreground="#7A9CC0"
+                                       FontFamily="Consolas"
+                                       FontSize="10" Margin="0,4,0,0"/>
+                            <TextBlock x:Name="TxtArtanOrnek"
+                                       Text="Örnek: 5s → 10s → 20s"
+                                       Foreground="#3A5070"
+                                       FontFamily="Consolas"
+                                       FontSize="9" Margin="0,2,0,0"/>
+                        </StackPanel>
+                        <Border x:Name="ToggleArtan"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Width="48" Height="26"
+                                CornerRadius="13" Cursor="Hand"
+                                MouseLeftButtonDown="ToggleArtan_Click">
+                            <Ellipse x:Name="ToggleArtanDaire"
+                                     Width="20" Height="20"
+                                     Margin="25,0,0,0"/>
+                        </Border>
+                    </Grid>
+                </Border>
+
+            </StackPanel>
+
+            <!-- ALT BUTONLAR -->
+            <Border Grid.Row="2"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,1,0,0">
+                <Grid Margin="20,0">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center">
+                        <Button Content="İPTAL"
+                                Width="90" Height="34" Margin="0,0,10,0"
+                                Background="Transparent"
+                                BorderBrush="#22FF006E" BorderThickness="1"
+                                Foreground="#FF006E" FontFamily="Consolas"
+                                FontSize="11" FontWeight="Bold" Cursor="Hand"
+                                Click="Kapat_Click"/>
+                        <Button Content="✔ KAYDET"
+                                Width="110" Height="34"
+                                Background="Transparent"
+                                BorderBrush="#3939FF14" BorderThickness="1"
+                                Foreground="#39FF14" FontFamily="Consolas"
+                                FontSize="11" FontWeight="Bold" Cursor="Hand"
+                                Click="Kaydet_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

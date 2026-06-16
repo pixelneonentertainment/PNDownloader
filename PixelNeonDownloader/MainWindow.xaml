@@ -1,0 +1,695 @@
+﻿<Window x:Class="PixelNeonDownloader.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:PixelNeonDownloader"
+        Title="PIXEL NEON DOWNLOADER"
+        Height="760" Width="1100"
+        MinHeight="600" MinWidth="900"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
+
+    <Border Background="#FF050810"
+            BorderBrush="#2200FFE5"
+            BorderThickness="1"
+            CornerRadius="6"
+            AllowDrop="True"
+            Drop="Ana_Drop"
+            DragOver="Ana_DragOver"
+            DragEnter="Ana_DragEnter"
+            DragLeave="Ana_DragLeave">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="48"/>
+                <RowDefinition Height="36"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="28"/>
+            </Grid.RowDefinitions>
+
+            <!-- BAŞLIK -->
+            <Border Grid.Row="0"
+                    Background="#0A0F1E"
+                    CornerRadius="6,6,0,0"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Grid Margin="16,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Border Width="30" Height="30"
+                                Background="#0D1428"
+                                BorderBrush="#3300FFE5"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Margin="0,0,10,0">
+                            <TextBlock Text="⬇" Foreground="#00FFE5"
+                                       FontSize="16"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center" Margin="0,0,16,0">
+                            <TextBlock Text="PIXEL NEON DOWNLOADER"
+                                       Foreground="#00FFE5"
+                                       FontFamily="Consolas"
+                                       FontSize="14" FontWeight="Bold"/>
+                            <TextBlock x:Name="TxtAltBaslik"
+                                       Text="by Pixel Neon Entertainment"
+                                       Foreground="#3A5070"
+                                       FontFamily="Consolas"
+                                       FontSize="9"/>
+                        </StackPanel>
+                        <Border Background="#0D1428"
+                                BorderBrush="#1500FFE5"
+                                BorderThickness="1"
+                                CornerRadius="3"
+                                Padding="10,4"
+                                VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
+                                    <TextBlock Text="↓ " Foreground="#00FFE5"
+                                               FontFamily="Consolas" FontSize="11"
+                                               VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="TxtIndirmeHiz"
+                                               Text="0 B/s" Foreground="#00FFE5"
+                                               FontFamily="Consolas" FontSize="11"
+                                               MinWidth="75" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
+                                    <TextBlock Text="↑ " Foreground="#BD00FF"
+                                               FontFamily="Consolas" FontSize="11"
+                                               VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="TxtYuklemeHiz"
+                                               Text="0 B/s" Foreground="#BD00FF"
+                                               FontFamily="Consolas" FontSize="11"
+                                               MinWidth="75" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="● " Foreground="#39FF14"
+                                               FontFamily="Consolas" FontSize="11"
+                                               VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="TxtAktifSayi"
+                                               Text="0 aktif" Foreground="#39FF14"
+                                               FontFamily="Consolas" FontSize="11"
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center">
+                        <Button Content="⊡" Width="36" Height="36"
+                                Background="Transparent" Foreground="#7A9CC0"
+                                BorderThickness="0" FontFamily="Consolas"
+                                FontSize="14" Cursor="Hand"
+                                ToolTip="Mini Mod"
+                                Click="MiniMod_Click"/>
+                        <Button Content="─" Width="36" Height="36"
+                                Background="Transparent" Foreground="#7A9CC0"
+                                BorderThickness="0" FontFamily="Consolas"
+                                FontSize="14" Cursor="Hand"
+                                Click="Minimize_Click"/>
+                        <Button Content="□" Width="36" Height="36"
+                                Background="Transparent" Foreground="#7A9CC0"
+                                BorderThickness="0" FontFamily="Consolas"
+                                FontSize="14" Cursor="Hand"
+                                Click="Maximize_Click"/>
+                        <Button Content="✕" Width="36" Height="36"
+                                Background="Transparent" Foreground="#FF2244"
+                                BorderThickness="0" FontFamily="Consolas"
+                                FontSize="14" Cursor="Hand"
+                                Click="Close_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- ARAÇ ÇUBUĞU -->
+            <Border x:Name="PanelAracCubugu"
+                    Grid.Row="1"
+                    Background="#0A0F1E"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,0,0,1">
+                <Grid Margin="12,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="220"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
+
+                        <Button x:Name="BtnYeniIndirme"
+                                Height="32" Padding="12,0" Margin="0,0,4,0"
+                                Background="Transparent"
+                                BorderBrush="#39FF14" BorderThickness="1"
+                                Foreground="#39FF14"
+                                FontFamily="Consolas" FontSize="11" FontWeight="Bold"
+                                Cursor="Hand" Click="BtnYeniIndirme_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="⊕ " FontSize="14"
+                                           VerticalAlignment="Center"/>
+                                <TextBlock Text="YENİ" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Height="32" Padding="10,0" Margin="0,0,4,0"
+                                Background="Transparent"
+                                BorderBrush="#2200FFE5" BorderThickness="1"
+                                Foreground="#00FFE5"
+                                FontFamily="Consolas" FontSize="10" FontWeight="Bold"
+                                Cursor="Hand" Click="BtnTopluIndirme_Click"
+                                Content="🔗 TOPLU"/>
+
+                        <Button Height="32" Padding="10,0" Margin="0,0,4,0"
+                                Background="Transparent"
+                                BorderBrush="#2239FF14" BorderThickness="1"
+                                Foreground="#39FF14"
+                                FontFamily="Consolas" FontSize="10" FontWeight="Bold"
+                                Cursor="Hand" Click="BtnUltraHiz_Click"
+                                Content="⚡ ULTRA"/>
+
+                        <Separator Width="1" Height="24"
+                                   Background="#1500FFE5" Margin="4,0"/>
+
+                        <Button x:Name="BtnDuraklat"
+                                Height="32" Padding="10,0" Margin="0,0,4,0"
+                                Background="Transparent"
+                                BorderBrush="#2200FFE5" BorderThickness="1"
+                                Foreground="#00FFE5"
+                                FontFamily="Consolas" FontSize="10" FontWeight="Bold"
+                                Cursor="Hand" Click="BtnDuraklat_Click"
+                                Content="⏸ DUR"/>
+
+                        <Button x:Name="BtnDevam"
+                                Height="32" Padding="10,0" Margin="0,0,4,0"
+                                Background="Transparent"
+                                BorderBrush="#2200FFE5" BorderThickness="1"
+                                Foreground="#00FFE5"
+                                FontFamily="Consolas" FontSize="10" FontWeight="Bold"
+                                Cursor="Hand" Click="BtnDevam_Click"
+                                Content="▶ DEVAM"/>
+
+                        <Button x:Name="BtnIptal"
+                                Height="32" Padding="10,0" Margin="0,0,4,0"
+                                Background="Transparent"
+                                BorderBrush="#22FF006E" BorderThickness="1"
+                                Foreground="#FF006E"
+                                FontFamily="Consolas" FontSize="10" FontWeight="Bold"
+                                Cursor="Hand" Click="BtnIptal_Click"
+                                Content="⏹ İPTAL"/>
+
+                        <Separator Width="1" Height="24"
+                                   Background="#1500FFE5" Margin="4,0"/>
+
+                        <Button Height="32" Width="36" Margin="0,0,4,0"
+        Background="Transparent"
+        BorderBrush="#2200FFE5" BorderThickness="1"
+        Cursor="Hand" ToolTip="Klasörü Aç"
+        Click="BtnKlasor_Click">
+                            <TextBlock Text="📁" Foreground="#00FFE5" FontFamily="Segoe UI Symbol" FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Button>
+
+                        <Button Height="32" Width="36" Margin="0,0,4,0"
+        Background="Transparent"
+        BorderBrush="#2200FFE5" BorderThickness="1"
+        Cursor="Hand" ToolTip="İstatistikler"
+        Click="BtnIstatistik_Click">
+                            <TextBlock Text="📊" Foreground="#00FFE5" FontFamily="Segoe UI Symbol" FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Button>
+
+                        <Button Height="32" Width="36" Margin="0,0,4,0"
+        Background="Transparent"
+        BorderBrush="#2200FFE5" BorderThickness="1"
+        Cursor="Hand" ToolTip="İndirme Kuyruğu"
+        Click="BtnKuyruk_Click">
+                            <TextBlock Text="📋" Foreground="#00FFE5" FontFamily="Segoe UI Symbol" FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Button>
+
+                        <Button Height="32" Width="36"
+        Background="Transparent"
+        BorderBrush="#2200FFE5" BorderThickness="1"
+        Cursor="Hand" ToolTip="Ayarlar"
+        Click="BtnAyarlar_Click">
+                            <TextBlock Text="⚙" Foreground="#00FFE5" FontFamily="Segoe UI Symbol" FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Button>
+
+                    </StackPanel>
+
+                    <!-- ARAMA -->
+                    <Border Grid.Column="1"
+                            Background="#050810"
+                            BorderBrush="#223A5070"
+                            BorderThickness="1"
+                            CornerRadius="2"
+                            VerticalAlignment="Center"
+                            Height="32">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="24"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="🔍" FontSize="13"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Foreground="#3A5070"/>
+                            <TextBox Grid.Column="1" x:Name="TxtArama"
+                                     Background="Transparent" Foreground="#E0F0FF"
+                                     BorderThickness="0" FontFamily="Consolas"
+                                     FontSize="11" VerticalAlignment="Center"
+                                     CaretBrush="#00FFE5"
+                                     TextChanged="TxtArama_Degisti">
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
+                                        <Style.Resources>
+                                            <VisualBrush x:Key="HintBrush"
+                                                         AlignmentX="Left"
+                                                         AlignmentY="Center"
+                                                         Stretch="None">
+                                                <VisualBrush.Visual>
+                                                    <TextBlock Text="Ara..."
+                                                               Foreground="#3A5070"
+                                                               FontFamily="Consolas"
+                                                               FontSize="11"/>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Style.Resources>
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="">
+                                                <Setter Property="Background"
+                                                        Value="{StaticResource HintBrush}"/>
+                                            </Trigger>
+                                            <Trigger Property="IsFocused" Value="True">
+                                                <Setter Property="Background"
+                                                        Value="Transparent"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                            <Button Grid.Column="2" x:Name="BtnAramaTemizle"
+                                    Content="✕" Background="Transparent"
+                                    BorderThickness="0" Foreground="#3A5070"
+                                    FontFamily="Consolas" FontSize="10"
+                                    Cursor="Hand" Visibility="Collapsed"
+                                    Click="BtnAramaTemizle_Click"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- FİLTRE -->
+            <Border x:Name="PanelFiltre"
+                    Grid.Row="2"
+                    Background="#0D1428"
+                    BorderBrush="#0D00FFE5"
+                    BorderThickness="0,0,0,1">
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            Margin="12,0">
+                    <TextBlock Text="FİLTRE:" Foreground="#3A5070"
+                               FontFamily="Consolas" FontSize="10"
+                               VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <Button x:Name="BtnFiltreTumu" Content="TÜMÜ"
+                            Height="22" Padding="10,0" Margin="0,0,4,0"
+                            Background="Transparent"
+                            BorderBrush="#00FFE5" BorderThickness="1"
+                            Foreground="#00FFE5"
+                            FontFamily="Consolas" FontSize="9" FontWeight="Bold"
+                            Cursor="Hand" Click="BtnFiltre_Click" Tag="Tümü"/>
+                    <Button Content="İNDİRİLİYOR"
+                            Height="22" Padding="10,0" Margin="0,0,4,0"
+                            Background="Transparent"
+                            BorderBrush="#223A5070" BorderThickness="1"
+                            Foreground="#7A9CC0" FontFamily="Consolas" FontSize="9"
+                            Cursor="Hand" Click="BtnFiltre_Click" Tag="Indiriliyor"/>
+                    <Button Content="TAMAMLANDI"
+                            Height="22" Padding="10,0" Margin="0,0,4,0"
+                            Background="Transparent"
+                            BorderBrush="#223A5070" BorderThickness="1"
+                            Foreground="#7A9CC0" FontFamily="Consolas" FontSize="9"
+                            Cursor="Hand" Click="BtnFiltre_Click" Tag="Tamamlandi"/>
+                    <Button Content="DURAKLATILDI"
+                            Height="22" Padding="10,0" Margin="0,0,4,0"
+                            Background="Transparent"
+                            BorderBrush="#223A5070" BorderThickness="1"
+                            Foreground="#7A9CC0" FontFamily="Consolas" FontSize="9"
+                            Cursor="Hand" Click="BtnFiltre_Click" Tag="Duraklatildi"/>
+                    <Button Content="HATA"
+                            Height="22" Padding="10,0"
+                            Background="Transparent"
+                            BorderBrush="#223A5070" BorderThickness="1"
+                            Foreground="#7A9CC0" FontFamily="Consolas" FontSize="9"
+                            Cursor="Hand" Click="BtnFiltre_Click" Tag="Hata"/>
+                    <TextBlock x:Name="TxtSonucSayisi" Foreground="#3A5070"
+                               FontFamily="Consolas" FontSize="10"
+                               VerticalAlignment="Center"
+                               Margin="12,0,0,0" Visibility="Collapsed"/>
+                </StackPanel>
+            </Border>
+
+            <!-- İNDİRME LİSTESİ -->
+            <Grid x:Name="PanelListe" Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Background="#0A0F1E"
+                        BorderBrush="#1500FFE5" BorderThickness="0,0,0,1">
+                    <Grid Margin="12,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="85"/>
+                            <!-- GEÇEN SÜRE SÜTUNU (YENİ) -->
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="TÜR"
+                                   Foreground="#3A5070" FontFamily="Consolas"
+                                   FontSize="10" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="DOSYA ADI"
+                                   Foreground="#3A5070" FontFamily="Consolas"
+                                   FontSize="10" FontWeight="Bold"
+                                   VerticalAlignment="Center" Margin="8,0"/>
+                        <TextBlock Grid.Column="2" Text="BOYUT"
+                                   Foreground="#3A5070" FontFamily="Consolas"
+                                   FontSize="10" FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="3" Text="İLERLEME"
+                                   Foreground="#3A5070" FontFamily="Consolas"
+                                   FontSize="10" FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="4" Text="HIZ"
+                                   Foreground="#3A5070" FontFamily="Consolas"
+                                   FontSize="10" FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                        <!-- Araya "GEÇEN" Başlığı Eklendi -->
+                        <TextBlock Grid.Column="5" Text="GEÇEN"
+                                   Foreground="#3A5070" FontFamily="Consolas"
+                                   FontSize="10" FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="6" Text="KALAN"
+                                   Foreground="#3A5070" FontFamily="Consolas"
+                                   FontSize="10" FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="7" Text="DURUM"
+                                   Foreground="#3A5070" FontFamily="Consolas"
+                                   FontSize="10" FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+                <ListBox x:Name="IndirmeListesi" Grid.Row="1"
+                         Background="Transparent" BorderThickness="0"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ContextMenu>
+                        <ContextMenu Background="#0D1428"
+                                     BorderBrush="#2200FFE5" BorderThickness="1">
+                            <MenuItem Header="▶  Devam Et" Foreground="#00FFE5"
+                                      FontFamily="Consolas" FontSize="11"
+                                      Background="Transparent"
+                                      Click="MenuDevam_Click"/>
+                            <MenuItem Header="⏸  Duraklat" Foreground="#00FFE5"
+                                      FontFamily="Consolas" FontSize="11"
+                                      Background="Transparent"
+                                      Click="MenuDuraklat_Click"/>
+                            <Separator Background="#1500FFE5"/>
+                            <MenuItem Header="📁  Klasörü Aç" Foreground="#00FFE5"
+                                      FontFamily="Consolas" FontSize="11"
+                                      Background="Transparent"
+                                      Click="MenuKlasor_Click"/>
+                            <MenuItem Header="🔗  URL'yi Kopyala" Foreground="#00FFE5"
+                                      FontFamily="Consolas" FontSize="11"
+                                      Background="Transparent"
+                                      Click="MenuUrlKopyala_Click"/>
+                            <MenuItem Header="⏱  Zamanla" Foreground="#FFD700"
+                                      FontFamily="Consolas" FontSize="11"
+                                      Background="Transparent"
+                                      Click="MenuZamanla_Click"/>
+                            <MenuItem Header="📡  Kaynak İzle" Foreground="#00FFE5"
+                                      FontFamily="Consolas" FontSize="11"
+                                      Background="Transparent"
+                                      Click="MenuKaynakIzle_Click"/>
+                            <MenuItem Header="🔐  Checksum Kontrol"
+                                      Foreground="#BD00FF"
+                                      FontFamily="Consolas" FontSize="11"
+                                      Background="Transparent"
+                                      Click="MenuChecksum_Click"/>
+                            <MenuItem Header="🔓  Şifreli Arşiv Aç"
+                                      Foreground="#FFD700"
+                                      FontFamily="Consolas" FontSize="11"
+                                      Background="Transparent"
+                                      Click="MenuSifreliArsiv_Click"/>
+                            <Separator Background="#1500FFE5"/>
+                            <MenuItem Header="🗑  Listeden Kaldır"
+                                      Foreground="#FF006E"
+                                      FontFamily="Consolas" FontSize="11"
+                                      Background="Transparent"
+                                      Click="MenuKaldir_Click"/>
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type local:DownloadItem}">
+                            <Grid Height="56">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="90"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="85"/>
+                                    <!-- GEÇEN SÜRE SÜTUNU (YENİ) -->
+                                    <ColumnDefinition Width="90"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           Text="{Binding DosyaIkonu}"
+                                           Foreground="{Binding DosyaIkonuRengi}"
+                                           FontSize="18"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+                                <StackPanel Grid.Column="1"
+                                            VerticalAlignment="Center" Margin="8,0">
+                                    <TextBlock Text="{Binding DosyaAdi}"
+                                               Foreground="#E0F0FF"
+                                               FontFamily="Consolas"
+                                               FontSize="12" FontWeight="Bold"
+                                               TextTrimming="CharacterEllipsis"/>
+                                    <ProgressBar Value="{Binding IlerlemeYuzde, Mode=OneWay}"
+                                                 Maximum="100" Height="4"
+                                                 Margin="0,4,8,0"
+                                                 Background="#0D1428"
+                                                 BorderThickness="0">
+                                        <ProgressBar.Foreground>
+                                            <LinearGradientBrush StartPoint="0,0"
+                                                                 EndPoint="1,0">
+                                                <GradientStop Color="#FF00FFE5" Offset="0"/>
+                                                <GradientStop Color="#FFBD00FF" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </ProgressBar.Foreground>
+                                    </ProgressBar>
+                                </StackPanel>
+                                <TextBlock Grid.Column="2"
+                                           Text="{Binding BoyutMetni}"
+                                           Foreground="#7A9CC0"
+                                           FontFamily="Consolas" FontSize="11"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock Grid.Column="3"
+                                           FontFamily="Consolas" FontSize="13"
+                                           FontWeight="Bold" Foreground="#00FFE5"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center">
+                                    <TextBlock.Text>
+                                        <Binding Path="IlerlemeYuzde"
+                                                 StringFormat="{}{0:F0}%"/>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                                <TextBlock Grid.Column="4"
+                                           Text="{Binding HizMetni}"
+                                           Foreground="#00FFE5"
+                                           FontFamily="Consolas" FontSize="11"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+                                <!-- Araya "Süre" Değeri Bağlandı -->
+                                <TextBlock Grid.Column="5"
+                                           Text="{Binding IndirmeSuresiMetni}"
+                                           Foreground="#7A9CC0"
+                                           FontFamily="Consolas" FontSize="11"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock Grid.Column="6"
+                                           Text="{Binding KalanSure}"
+                                           Foreground="#7A9CC0"
+                                           FontFamily="Consolas" FontSize="11"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+                                <Border Grid.Column="7"
+                                        Background="#0D1428"
+                                        CornerRadius="2" Padding="6,3"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding DurumMetni}"
+                                               FontFamily="Consolas" FontSize="9"
+                                               FontWeight="Bold"
+                                               Foreground="{Binding DurumRengi}"/>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                            <Setter Property="BorderBrush" Value="#110D1428"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Padding" Value="12,0"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#0F162040"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#2200FFE5"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+
+                <!-- SÜRÜKLE BIRAK OVERLAY -->
+                <Border x:Name="SurukleBirakOverlay"
+                        Grid.Row="0" Grid.RowSpan="2"
+                        Background="#CC050810"
+                        BorderBrush="#4400FFE5"
+                        BorderThickness="3"
+                        CornerRadius="4"
+                        Visibility="Collapsed"
+                        Panel.ZIndex="99">
+                    <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                        <TextBlock Text="⬇" Foreground="#00FFE5"
+                                   FontSize="56" HorizontalAlignment="Center"/>
+                        <TextBlock Text="BIRAK!"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="22" FontWeight="Bold"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,10,0,0"/>
+                        <TextBlock Text="Link veya dosya eklenecek"
+                                   Foreground="#7A9CC0"
+                                   FontFamily="Consolas" FontSize="11"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- PANO BANNER -->
+            <Border x:Name="PanoBanner"
+                    Grid.Row="4"
+                    Background="#0D1428"
+                    BorderBrush="#2200FFE5"
+                    BorderThickness="0,1,0,0"
+                    Height="36"
+                    Visibility="Collapsed">
+                <Grid Margin="12,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock x:Name="TxtPanoBanner"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas" FontSize="11"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center">
+                        <Button Content="⬇ İNDİR"
+                                Height="24" Padding="10,0" Margin="0,0,6,0"
+                                Background="Transparent"
+                                BorderBrush="#3900FFE5" BorderThickness="1"
+                                Foreground="#00FFE5"
+                                FontFamily="Consolas" FontSize="10" FontWeight="Bold"
+                                Cursor="Hand" Click="BtnPanoEkle_Click"/>
+                        <Button Content="✕" Height="24" Width="24"
+                                Background="Transparent" BorderThickness="0"
+                                Foreground="#FF2244"
+                                FontFamily="Consolas" FontSize="12"
+                                Cursor="Hand" Click="BtnPanoKapat_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- HIZ GRAFİĞİ -->
+            <Border x:Name="PanelGrafik"
+                    Grid.Row="5"
+                    Background="#050810"
+                    BorderBrush="#0D00FFE5"
+                    BorderThickness="0,1,0,0">
+                <Grid Margin="8,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="70"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                        <TextBlock Text="GÜNCEL" Foreground="#3A5070"
+                                   FontFamily="Consolas" FontSize="8"
+                                   FontWeight="Bold"/>
+                        <TextBlock x:Name="TxtGrafikHiz" Text="0 B/s"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas" FontSize="10"
+                                   FontWeight="Bold" Margin="0,2,0,0"/>
+                    </StackPanel>
+                    <Canvas x:Name="HizGrafik" Grid.Column="1"
+                            Height="64" Margin="4,0"/>
+                    <StackPanel Grid.Column="2" VerticalAlignment="Center"
+                                HorizontalAlignment="Right">
+                        <TextBlock Text="MAKSİMUM" Foreground="#3A5070"
+                                   FontFamily="Consolas" FontSize="8"
+                                   FontWeight="Bold"/>
+                        <TextBlock x:Name="TxtGrafikMaks" Text="0 B/s"
+                                   Foreground="#BD00FF"
+                                   FontFamily="Consolas" FontSize="10"
+                                   FontWeight="Bold" Margin="0,2,0,0"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- DURUM ÇUBUĞU -->
+            <Border Grid.Row="6"
+                    Background="#050810"
+                    BorderBrush="#1000FFE5"
+                    BorderThickness="0,1,0,0">
+                <Grid Margin="12,0">
+                    <TextBlock x:Name="TxtDurum" Text="Hazır"
+                               Foreground="#3A5070"
+                               FontFamily="Consolas" FontSize="10"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="PIXEL NEON ENTERTAINMENT  v1.0"
+                               Foreground="#1A2A3A"
+                               FontFamily="Consolas" FontSize="9"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,230 @@
+﻿<Window x:Class="PixelNeonDownloader.ZamanlaPenceresi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="İndirme Zamanla"
+        Height="395" Width="420"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Border Background="#0A0F1E"
+            BorderBrush="#2200FFE5"
+            BorderThickness="1"
+            CornerRadius="6">
+        <Border.Effect>
+            <DropShadowEffect Color="#00FFE5" BlurRadius="20"
+                              ShadowDepth="0" Opacity="0.3"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="56"/>
+            </Grid.RowDefinitions>
+
+            <!-- BAŞLIK -->
+            <Border Grid.Row="0"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="Baslik_MouseLeftButtonDown">
+                <Grid Margin="16,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="⏱ " Foreground="#00FFE5"
+                                   FontSize="14" VerticalAlignment="Center"/>
+                        <TextBlock Text="İNDİRME ZAMANLA"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="12" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✕"
+                            HorizontalAlignment="Right"
+                            Width="32" Height="32"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#FF2244"
+                            FontFamily="Consolas"
+                            Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- İÇERİK -->
+            <StackPanel Grid.Row="1" Margin="20,16">
+
+                <!-- Dosya Adı -->
+                <Border Background="#0D1428"
+                        BorderBrush="#1500FFE5"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="12,8"
+                        Margin="0,0,0,12">
+                    <StackPanel>
+                        <TextBlock Text="DOSYA"
+                                   Foreground="#3A5070"
+                                   FontFamily="Consolas"
+                                   FontSize="9" FontWeight="Bold"/>
+                        <TextBlock x:Name="TxtDosyaAdi"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="12" FontWeight="Bold"
+                                   TextTrimming="CharacterEllipsis"
+                                   Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Tarih Seçimi -->
+                <TextBlock Text="BAŞLANGIÇ TARİHİ"
+                           Foreground="#7A9CC0"
+                           FontFamily="Consolas"
+                           FontSize="10" FontWeight="Bold"
+                           Margin="0,0,0,6"/>
+
+                <DatePicker x:Name="TarihSecici"
+                            Height="32"
+                            Background="#050810"
+                            Foreground="#E0F0FF"
+                            BorderBrush="#223A5070"
+                            BorderThickness="1"
+                            FontFamily="Consolas"
+                            FontSize="12"
+                            Margin="0,0,0,12"
+                            SelectedDateChanged="TarihSecici_SelectedDateChanged"/>
+
+                <!-- Saat Seçimi -->
+                <TextBlock Text="BAŞLANGIÇ SAATİ"
+                           Foreground="#7A9CC0"
+                           FontFamily="Consolas"
+                           FontSize="10" FontWeight="Bold"
+                           Margin="0,0,0,6"/>
+
+                <Grid Height="80">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Saat -->
+                    <Border Grid.Column="0"
+                            Background="#050810"
+                            BorderBrush="#223A5070"
+                            BorderThickness="1"
+                            CornerRadius="2">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="38"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+
+                            <Button Grid.Row="0" Content="▲"
+                                    Background="Transparent" BorderThickness="0"
+                                    Foreground="#00FFE5" FontFamily="Consolas"
+                                    Cursor="Hand" Click="SaatArttir_Click"/>
+
+                            <TextBlock x:Name="TxtSaat"
+                                       Grid.Row="1"
+                                       Text="08"
+                                       Foreground="#00FFE5"
+                                       FontFamily="Consolas"
+                                       FontSize="28" FontWeight="Bold"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+
+                            <Button Grid.Row="2" Content="▼"
+                                    Background="Transparent" BorderThickness="0"
+                                    Foreground="#00FFE5" FontFamily="Consolas"
+                                    Cursor="Hand" Click="SaatAzalt_Click"/>
+                        </Grid>
+                    </Border>
+
+                    <TextBlock Grid.Column="1" Text=":"
+                               Foreground="#00FFE5"
+                               FontFamily="Consolas"
+                               FontSize="28" FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+
+                    <!-- Dakika -->
+                    <Border Grid.Column="2"
+                            Background="#050810"
+                            BorderBrush="#223A5070"
+                            BorderThickness="1"
+                            CornerRadius="2">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="38"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+
+                            <Button Grid.Row="0" Content="▲"
+                                    Background="Transparent" BorderThickness="0"
+                                    Foreground="#00FFE5" FontFamily="Consolas"
+                                    Cursor="Hand" Click="DakikaArttir_Click"/>
+
+                            <TextBlock x:Name="TxtDakika"
+                                       Grid.Row="1"
+                                       Text="00"
+                                       Foreground="#00FFE5"
+                                       FontFamily="Consolas"
+                                       FontSize="28" FontWeight="Bold"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+
+                            <Button Grid.Row="2" Content="▼"
+                                    Background="Transparent" BorderThickness="0"
+                                    Foreground="#00FFE5" FontFamily="Consolas"
+                                    Cursor="Hand" Click="DakikaAzalt_Click"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <!-- Kalan Süre -->
+                <TextBlock x:Name="TxtKalanSure"
+                           Foreground="#7A9CC0"
+                           FontFamily="Consolas"
+                           FontSize="10"
+                           HorizontalAlignment="Center"
+                           Margin="0,10,0,0"/>
+
+            </StackPanel>
+
+            <!-- ALT BUTONLAR -->
+            <Border Grid.Row="2"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,1,0,0">
+                <Grid Margin="20,0">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center">
+                        <Button Content="İPTAL"
+                                Width="90" Height="34"
+                                Margin="0,0,10,0"
+                                Background="Transparent"
+                                BorderBrush="#22FF006E" BorderThickness="1"
+                                Foreground="#FF006E"
+                                FontFamily="Consolas"
+                                FontSize="11" FontWeight="Bold"
+                                Cursor="Hand"
+                                Click="Kapat_Click"/>
+                        <Button Content="⏱ ZAMANLA"
+                                Width="120" Height="34"
+                                Background="Transparent"
+                                BorderBrush="#3900FFE5" BorderThickness="1"
+                                Foreground="#00FFE5"
+                                FontFamily="Consolas"
+                                FontSize="11" FontWeight="Bold"
+                                Cursor="Hand"
+                                Click="Zamanla_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

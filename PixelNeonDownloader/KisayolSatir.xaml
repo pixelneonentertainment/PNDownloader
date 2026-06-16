@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="PixelNeonDownloader.KisayolSatir"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="32">
+
+    <Grid Margin="0,2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="130"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0"
+                Background="#0D1428"
+                BorderBrush="#2200FFE5"
+                BorderThickness="1"
+                CornerRadius="3"
+                Padding="8,4"
+                HorizontalAlignment="Left">
+            <TextBlock x:Name="TxtKisayol"
+                       Foreground="#00FFE5"
+                       FontFamily="Consolas"
+                       FontSize="11" FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+        </Border>
+
+        <TextBlock Grid.Column="1"
+                   x:Name="TxtAciklama"
+                   Foreground="#7A9CC0"
+                   FontFamily="Consolas"
+                   FontSize="11"
+                   VerticalAlignment="Center"
+                   Margin="12,0,0,0"/>
+    </Grid>
+</UserControl>

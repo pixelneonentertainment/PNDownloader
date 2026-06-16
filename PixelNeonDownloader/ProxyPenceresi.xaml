@@ -1,0 +1,286 @@
+﻿<Window x:Class="PixelNeonDownloader.ProxyPenceresi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Proxy Ayarları"
+        Height="480" Width="480"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Border Background="#0A0F1E"
+            BorderBrush="#2200FFE5"
+            BorderThickness="1"
+            CornerRadius="6">
+        <Border.Effect>
+            <DropShadowEffect Color="#00FFE5" BlurRadius="20"
+                              ShadowDepth="0" Opacity="0.3"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="56"/>
+            </Grid.RowDefinitions>
+
+            <!-- BAŞLIK -->
+            <Border Grid.Row="0"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="Baslik_MouseLeftButtonDown">
+                <Grid Margin="16,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="🌐 " Foreground="#00FFE5"
+                                   FontSize="14" VerticalAlignment="Center"/>
+                        <TextBlock Text="PROXY / VPN AYARLARI"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="12" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✕"
+                            HorizontalAlignment="Right"
+                            Width="32" Height="32"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#FF2244"
+                            FontFamily="Consolas"
+                            Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- İÇERİK -->
+            <ScrollViewer Grid.Row="1"
+                          VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="20,16">
+
+                    <!-- Proxy Aç/Kapat -->
+                    <Border Background="#0D1428"
+                            BorderBrush="#1500FFE5"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="14,12"
+                            Margin="0,0,0,16">
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text="PROXY KULLAN"
+                                           Foreground="#E0F0FF"
+                                           FontFamily="Consolas"
+                                           FontSize="11" FontWeight="Bold"/>
+                                <TextBlock Text="İndirme trafiğini proxy üzerinden yönlendir"
+                                           Foreground="#7A9CC0"
+                                           FontFamily="Consolas"
+                                           FontSize="10" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <Border x:Name="ToggleProxy"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Width="48" Height="26"
+                                    CornerRadius="13" Cursor="Hand"
+                                    MouseLeftButtonDown="ToggleProxy_Click">
+                                <Ellipse x:Name="ToggleProxyDaire"
+                                         Width="20" Height="20"
+                                         Margin="3,0,0,0"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <!-- Proxy Türü -->
+                    <TextBlock Text="PROXY TÜRÜ"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,0,0,6"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
+                        <RadioButton x:Name="RdoHTTP"
+                                     Content="HTTP"
+                                     IsChecked="True"
+                                     Foreground="#E0F0FF"
+                                     FontFamily="Consolas"
+                                     FontSize="11"
+                                     Margin="0,0,16,0"/>
+                        <RadioButton x:Name="RdoHTTPS"
+                                     Content="HTTPS"
+                                     Foreground="#E0F0FF"
+                                     FontFamily="Consolas"
+                                     FontSize="11"
+                                     Margin="0,0,16,0"/>
+                        <RadioButton x:Name="RdoSOCKS"
+                                     Content="SOCKS5"
+                                     Foreground="#E0F0FF"
+                                     FontFamily="Consolas"
+                                     FontSize="11"/>
+                    </StackPanel>
+
+                    <!-- Adres ve Port -->
+                    <TextBlock Text="PROXY ADRESİ"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10" FontWeight="Bold"
+                               Margin="0,0,0,6"/>
+                    <Grid Margin="0,0,0,14">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="12"/>
+                            <ColumnDefinition Width="90"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox x:Name="TxtAdres"
+                                 Grid.Column="0"
+                                 Height="38"
+                                 Background="#050810" Foreground="#E0F0FF"
+                                 BorderBrush="#223A5070" BorderThickness="1"
+                                 FontFamily="Consolas" FontSize="12"
+                                 Padding="10,8" CaretBrush="#00FFE5"
+                                 Text="127.0.0.1"/>
+
+                        <TextBox x:Name="TxtPort"
+                                 Grid.Column="2"
+                                 Height="38"
+                                 Background="#050810" Foreground="#E0F0FF"
+                                 BorderBrush="#223A5070" BorderThickness="1"
+                                 FontFamily="Consolas" FontSize="12"
+                                 Padding="10,8" CaretBrush="#00FFE5"
+                                 Text="8080"/>
+                    </Grid>
+
+                    <!-- Kimlik Doğrulama -->
+                    <Border Background="#0D1428"
+                            BorderBrush="#1500FFE5"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="14,12"
+                            Margin="0,0,0,14">
+                        <StackPanel>
+                            <Grid Margin="0,0,0,10">
+                                <TextBlock Text="KİMLİK DOĞRULAMA"
+                                           Foreground="#E0F0FF"
+                                           FontFamily="Consolas"
+                                           FontSize="11" FontWeight="Bold"
+                                           VerticalAlignment="Center"/>
+                                <Border x:Name="ToggleKimlik"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Width="48" Height="26"
+                                        CornerRadius="13" Cursor="Hand"
+                                        MouseLeftButtonDown="ToggleKimlik_Click">
+                                    <Ellipse x:Name="ToggleKimlikDaire"
+                                             Width="20" Height="20"
+                                             Margin="3,0,0,0"/>
+                                </Border>
+                            </Grid>
+
+                            <StackPanel x:Name="PanelKimlik"
+                                        Visibility="Collapsed">
+                                <TextBlock Text="KULLANICI ADI"
+                                           Foreground="#7A9CC0"
+                                           FontFamily="Consolas"
+                                           FontSize="10"
+                                           Margin="0,0,0,4"/>
+                                <TextBox x:Name="TxtKullaniciAdi"
+                                         Height="34"
+                                         Background="#050810" Foreground="#E0F0FF"
+                                         BorderBrush="#223A5070" BorderThickness="1"
+                                         FontFamily="Consolas" FontSize="11"
+                                         Padding="8,6" CaretBrush="#00FFE5"
+                                         Margin="0,0,0,8"/>
+
+                                <TextBlock Text="ŞİFRE"
+                                           Foreground="#7A9CC0"
+                                           FontFamily="Consolas"
+                                           FontSize="10"
+                                           Margin="0,0,0,4"/>
+                                <PasswordBox x:Name="TxtSifre"
+                                             Height="34"
+                                             Background="#050810" Foreground="#E0F0FF"
+                                             BorderBrush="#223A5070" BorderThickness="1"
+                                             FontFamily="Consolas" FontSize="11"
+                                             Padding="8,6"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- SSL Sertifika -->
+                    <Border Background="#0D1428"
+                            BorderBrush="#1500FFE5"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="14,12"
+                            Margin="0,0,0,14">
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text="SSL DOĞRULAMAYI ATLA"
+                                           Foreground="#E0F0FF"
+                                           FontFamily="Consolas"
+                                           FontSize="11" FontWeight="Bold"/>
+                                <TextBlock Text="Self-signed sertifikalı proxy'ler için"
+                                           Foreground="#7A9CC0"
+                                           FontFamily="Consolas"
+                                           FontSize="10" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <Border x:Name="ToggleSSL"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Width="48" Height="26"
+                                    CornerRadius="13" Cursor="Hand"
+                                    MouseLeftButtonDown="ToggleSSL_Click">
+                                <Ellipse x:Name="ToggleSSLDaire"
+                                         Width="20" Height="20"
+                                         Margin="3,0,0,0"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <!-- Test Butonu -->
+                    <Button Content="🔍  PROXY'Yİ TEST ET"
+                            Height="36"
+                            Background="Transparent"
+                            BorderBrush="#2200FFE5" BorderThickness="1"
+                            Foreground="#00FFE5"
+                            FontFamily="Consolas" FontSize="11" FontWeight="Bold"
+                            Cursor="Hand"
+                            Click="ProxyTest_Click"/>
+
+                    <TextBlock x:Name="TxtTestSonuc"
+                               Foreground="#7A9CC0"
+                               FontFamily="Consolas"
+                               FontSize="10"
+                               HorizontalAlignment="Center"
+                               Margin="0,8,0,0"
+                               Visibility="Collapsed"/>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- ALT BUTONLAR -->
+            <Border Grid.Row="2"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,1,0,0">
+                <Grid Margin="20,0">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center">
+                        <Button Content="İPTAL"
+                                Width="90" Height="34" Margin="0,0,10,0"
+                                Background="Transparent"
+                                BorderBrush="#22FF006E" BorderThickness="1"
+                                Foreground="#FF006E" FontFamily="Consolas"
+                                FontSize="11" FontWeight="Bold" Cursor="Hand"
+                                Click="Kapat_Click"/>
+                        <Button Content="💾 KAYDET"
+                                Width="110" Height="34"
+                                Background="Transparent"
+                                BorderBrush="#3900FFE5" BorderThickness="1"
+                                Foreground="#00FFE5" FontFamily="Consolas"
+                                FontSize="11" FontWeight="Bold" Cursor="Hand"
+                                Click="Kaydet_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

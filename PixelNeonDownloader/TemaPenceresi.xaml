@@ -1,0 +1,283 @@
+﻿<Window x:Class="PixelNeonDownloader.TemaPenceresi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Tema Seçici"
+        Height="420" Width="500"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Border Background="#0A0F1E"
+            BorderBrush="#2200FFE5"
+            BorderThickness="1"
+            CornerRadius="6">
+        <Border.Effect>
+            <DropShadowEffect Color="#00FFE5" BlurRadius="20"
+                              ShadowDepth="0" Opacity="0.3"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="56"/>
+            </Grid.RowDefinitions>
+
+            <!-- BAŞLIK -->
+            <Border Grid.Row="0"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="Baslik_MouseLeftButtonDown">
+                <Grid Margin="16,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="🎨 " Foreground="#00FFE5"
+                                   FontSize="14" VerticalAlignment="Center"/>
+                        <TextBlock Text="TEMA SEÇİCİ"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="12" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✕"
+                            HorizontalAlignment="Right"
+                            Width="32" Height="32"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#FF2244"
+                            FontFamily="Consolas"
+                            Cursor="Hand"
+                            Click="Kapat_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- İÇERİK -->
+            <StackPanel Grid.Row="1" Margin="16,16">
+
+                <TextBlock Text="NEON TEMALAR"
+                           Foreground="#7A9CC0"
+                           FontFamily="Consolas"
+                           FontSize="10" FontWeight="Bold"
+                           Margin="0,0,0,16"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="8"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Cyan -->
+                    <Border x:Name="KartCyan" Grid.Column="0" Grid.Row="0"
+                            Background="#0D1428" CornerRadius="6"
+                            BorderBrush="#2200FFE5" BorderThickness="2"
+                            Cursor="Hand" Height="100"
+                            MouseLeftButtonDown="TemaKart_Click" Tag="Cyan">
+                        <StackPanel VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <TextBlock Text="◈" FontSize="28" Foreground="#00FFE5"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="CYAN" Foreground="#00FFE5"
+                                       FontFamily="Consolas" FontSize="11"
+                                       FontWeight="Bold" HorizontalAlignment="Center"
+                                       Margin="0,6,0,0"/>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center" Margin="0,6,0,0">
+                                <Border Width="16" Height="8" CornerRadius="2"
+                                        Background="#00FFE5" Margin="2,0"/>
+                                <Border Width="16" Height="8" CornerRadius="2"
+                                        Background="#BD00FF" Margin="2,0"/>
+                                <Border Width="16" Height="8" CornerRadius="2"
+                                        Background="#39FF14" Margin="2,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Pink -->
+                    <Border x:Name="KartPink" Grid.Column="2" Grid.Row="0"
+                            Background="#150A1E" CornerRadius="6"
+                            BorderBrush="#22FF006E" BorderThickness="2"
+                            Cursor="Hand" Height="100"
+                            MouseLeftButtonDown="TemaKart_Click" Tag="Pink">
+                        <StackPanel VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <TextBlock Text="◆" FontSize="28" Foreground="#FF006E"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="PINK" Foreground="#FF006E"
+                                       FontFamily="Consolas" FontSize="11"
+                                       FontWeight="Bold" HorizontalAlignment="Center"
+                                       Margin="0,6,0,0"/>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center" Margin="0,6,0,0">
+                                <Border Width="16" Height="8" CornerRadius="2"
+                                        Background="#FF006E" Margin="2,0"/>
+                                <Border Width="16" Height="8" CornerRadius="2"
+                                        Background="#FF00CC" Margin="2,0"/>
+                                <Border Width="16" Height="8" CornerRadius="2"
+                                        Background="#FFD700" Margin="2,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Purple -->
+                    <Border x:Name="KartPurple" Grid.Column="4" Grid.Row="0"
+                            Background="#0D0A1E" CornerRadius="6"
+                            BorderBrush="#22BD00FF" BorderThickness="2"
+                            Cursor="Hand" Height="100"
+                            MouseLeftButtonDown="TemaKart_Click" Tag="Purple">
+                        <StackPanel VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <TextBlock Text="◉" FontSize="28" Foreground="#BD00FF"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="PURPLE" Foreground="#BD00FF"
+                                       FontFamily="Consolas" FontSize="11"
+                                       FontWeight="Bold" HorizontalAlignment="Center"
+                                       Margin="0,6,0,0"/>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center" Margin="0,6,0,0">
+                                <Border Width="16" Height="8" CornerRadius="2"
+                                        Background="#BD00FF" Margin="2,0"/>
+                                <Border Width="16" Height="8" CornerRadius="2"
+                                        Background="#7700FF" Margin="2,0"/>
+                                <Border Width="16" Height="8" CornerRadius="2"
+                                        Background="#00FFE5" Margin="2,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Green -->
+                    <Border x:Name="KartGreen" Grid.Column="0" Grid.Row="2"
+                            Background="#0A1A0A" CornerRadius="6"
+                            BorderBrush="#2239FF14" BorderThickness="2"
+                            Cursor="Hand" Height="100"
+                            MouseLeftButtonDown="TemaKart_Click" Tag="Green">
+                        <StackPanel VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <TextBlock Text="◎" FontSize="28" Foreground="#39FF14"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="GREEN" Foreground="#39FF14"
+                                       FontFamily="Consolas" FontSize="11"
+                                       FontWeight="Bold" HorizontalAlignment="Center"
+                                       Margin="0,6,0,0"/>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center" Margin="0,6,0,0">
+                                <Border Width="16" Height="8" CornerRadius="2"
+                                        Background="#39FF14" Margin="2,0"/>
+                                <Border Width="16" Height="8" CornerRadius="2"
+                                        Background="#00FF88" Margin="2,0"/>
+                                <Border Width="16" Height="8" CornerRadius="2"
+                                        Background="#FFD700" Margin="2,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Orange -->
+                    <Border x:Name="KartOrange" Grid.Column="2" Grid.Row="2"
+                            Background="#1A0A00" CornerRadius="6"
+                            BorderBrush="#22FF8C00" BorderThickness="2"
+                            Cursor="Hand" Height="100"
+                            MouseLeftButtonDown="TemaKart_Click" Tag="Orange">
+                        <StackPanel VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <TextBlock Text="◇" FontSize="28" Foreground="#FF8C00"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="ORANGE" Foreground="#FF8C00"
+                                       FontFamily="Consolas" FontSize="11"
+                                       FontWeight="Bold" HorizontalAlignment="Center"
+                                       Margin="0,6,0,0"/>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center" Margin="0,6,0,0">
+                                <Border Width="16" Height="8" CornerRadius="2"
+                                        Background="#FF8C00" Margin="2,0"/>
+                                <Border Width="16" Height="8" CornerRadius="2"
+                                        Background="#FF4500" Margin="2,0"/>
+                                <Border Width="16" Height="8" CornerRadius="2"
+                                        Background="#FFD700" Margin="2,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Red -->
+                    <Border x:Name="KartRed" Grid.Column="4" Grid.Row="2"
+                            Background="#1A000A" CornerRadius="6"
+                            BorderBrush="#22FF2244" BorderThickness="2"
+                            Cursor="Hand" Height="100"
+                            MouseLeftButtonDown="TemaKart_Click" Tag="Red">
+                        <StackPanel VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <TextBlock Text="◈" FontSize="28" Foreground="#FF2244"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="RED" Foreground="#FF2244"
+                                       FontFamily="Consolas" FontSize="11"
+                                       FontWeight="Bold" HorizontalAlignment="Center"
+                                       Margin="0,6,0,0"/>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center" Margin="0,6,0,0">
+                                <Border Width="16" Height="8" CornerRadius="2"
+                                        Background="#FF2244" Margin="2,0"/>
+                                <Border Width="16" Height="8" CornerRadius="2"
+                                        Background="#FF0066" Margin="2,0"/>
+                                <Border Width="16" Height="8" CornerRadius="2"
+                                        Background="#FFD700" Margin="2,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                </Grid>
+
+                <!-- Aktif Tema -->
+                <Border Background="#0D1428"
+                        BorderBrush="#1500FFE5"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="12,8"
+                        Margin="0,16,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="AKTİF TEMA: "
+                                   Foreground="#3A5070"
+                                   FontFamily="Consolas"
+                                   FontSize="10"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock x:Name="TxtAktifTema"
+                                   Foreground="#00FFE5"
+                                   FontFamily="Consolas"
+                                   FontSize="10" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock Text=" — Tema değişikliği anında uygulanır"
+                                   Foreground="#3A5070"
+                                   FontFamily="Consolas"
+                                   FontSize="9"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+
+            <!-- ALT -->
+            <Border Grid.Row="2"
+                    BorderBrush="#1500FFE5"
+                    BorderThickness="0,1,0,0">
+                <Button Content="KAPAT"
+                        Width="100" Height="32"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,16,0"
+                        Background="Transparent"
+                        BorderBrush="#2200FFE5" BorderThickness="1"
+                        Foreground="#00FFE5"
+                        FontFamily="Consolas"
+                        FontSize="11" FontWeight="Bold"
+                        Cursor="Hand"
+                        Click="Kapat_Click"/>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

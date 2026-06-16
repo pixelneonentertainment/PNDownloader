@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Pixel Neon Integration",
+  "version": "1.0",
+  "description": "Downloads redirector for Pixel Neon Downloader.",
+  "permissions": [ "downloads" ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
