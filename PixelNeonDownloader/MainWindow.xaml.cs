@@ -1456,7 +1456,7 @@ namespace PixelNeonDownloader
     public class UpdateManager
     {
         // GitHub'daki raw JSON dosyanızın gerçek adresi
-        private const string UpdateJsonUrl = "https://raw.githubusercontent.com/pixelneonentertainment/Pixel-Neon-Downloader/refs/heads/main/update.json";
+        private const string UpdateJsonUrl = "https://raw.githubusercontent.com/pixelneonentertainment/PNDownloader/main/update.json";
 
         // Mevcut uygulamanın versiyonunu otomatik alır (AssemblyInfo.cs dosyasındaki sürüm)
         private static readonly string CurrentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
